@@ -212,7 +212,7 @@ body.seated #look,body.seated #joy,body.seated #lookhint{display:none}
 .pays span{display:flex;justify-content:space-between;gap:8px}
 .pays b{color:var(--gold)}
 /* Lioness' Roar: a full-screen cabinet */
-#lr{--lw:min(500px,max(230px,calc((100vh - 300px)*.93)));--lw:min(500px,max(230px,calc((100dvh - 300px)*.93)));position:fixed;inset:0;z-index:9;display:none;flex-direction:column;gap:6px;background:#160610;
+#lr{--lw:min(780px,max(230px,calc((100vh - 300px)*.93)));--lw:min(780px,max(230px,calc((100dvh - 300px)*.93)));position:fixed;inset:0;z-index:9;display:none;flex-direction:column;justify-content:center;gap:6px;background:#160610;
   padding:calc(env(safe-area-inset-top) + 8px) 10px calc(env(safe-area-inset-bottom) + 10px);animation:lrin .45s ease both}
 #lr.open{display:flex}
 @keyframes lrin{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
@@ -224,7 +224,7 @@ body.seated #look,body.seated #joy,body.seated #lookhint{display:none}
 .lrjp b{font-size:13.5px;letter-spacing:-.2px;color:#fff4e6;white-space:nowrap}
 .lrjp .grand{grid-column:1/3;justify-content:center;gap:12px;--jc:#ffd76a;font-size:12px;padding:5px 10px}.lrjp .grand b{font-size:19px}
 .lrjp .mega{--jc:#ff6b81}.lrjp .major{--jc:#c58bff}.lrjp .minor{--jc:#6fd0ff}.lrjp .mini{--jc:#8be28b}
-.lrscene{position:relative;flex:1;min-height:96px;max-width:var(--lw);width:100%;margin:0 auto;border-radius:14px;overflow:hidden;border:3px solid #e6bc68;
+.lrscene{position:relative;flex:1;min-height:96px;max-height:min(calc(var(--lw)*.76),76vw);max-width:var(--lw);width:100%;margin:0 auto;border-radius:14px;overflow:hidden;border:3px solid #e6bc68;
   box-shadow:0 0 0 1.5px #8a6420,0 0 18px rgba(230,188,104,.45),inset 0 0 0 2px #8a6420,inset 0 0 26px rgba(255,200,110,.35)}
 .lrscene::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:10px;
   background:radial-gradient(circle at 0 0,#ffe08a 0 9px,#a9812f 10px 12px,transparent 13px),radial-gradient(circle at 100% 0,#ffe08a 0 9px,#a9812f 10px 12px,transparent 13px),
