@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#3d0610">
 <title>REDjack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Figtree:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Figtree:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
 <style>
 /* Layout idea: one-screen red felt table. Dealer on top, a gold arc of house rules,
    up to three betting spots below, controls pinned to the bottom. Single theme by choice. */
@@ -40,13 +40,13 @@ button:focus-visible,label:focus-within{outline:2px solid var(--gold);outline-of
 #scene{position:fixed;inset:0;perspective:700px;overflow:hidden}
 #world{position:absolute;inset:0;transform-style:preserve-3d}
 #room{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transform:translateZ(700px)}
-.wall{position:absolute;width:800px;height:400px;left:-400px;top:-200px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.wall{position:absolute;width:1120px;height:400px;left:-560px;top:-200px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .wall svg{display:block}
-.w-front{transform:translateZ(-1400px) scale(3.5)}
-.w-left{transform:rotateY(90deg) translateZ(-1400px) scale(3.5)}
-.w-right{transform:rotateY(-90deg) translateZ(-1400px) scale(3.5)}
-.w-back{transform:rotateY(180deg) translateZ(-1400px) scale(3.5)}
-.flat{position:absolute;width:400px;height:400px;left:-200px;top:-200px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.w-front{transform:translateZ(-1960px) scale(3.5)}
+.w-left{transform:rotateY(90deg) translateZ(-1960px) scale(3.5)}
+.w-right{transform:rotateY(-90deg) translateZ(-1960px) scale(3.5)}
+.w-back{transform:rotateY(180deg) translateZ(-1960px) scale(3.5)}
+.flat{position:absolute;width:560px;height:560px;left:-280px;top:-280px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .w-floor{transform:rotateX(90deg) translateZ(-700px) scale(7);
   background:radial-gradient(circle at 50% 50%,transparent 30%,rgba(0,0,0,.55) 75%),
    radial-gradient(circle,rgba(230,188,104,.5) 0 1.5px,transparent 2.5px) 0 0/28px 28px,
@@ -145,12 +145,42 @@ body.seated #look,body.seated #joy,body.seated #lookhint{display:none}
 #mStage .cards{--cw:78px}
 #mMsg{margin:0;min-height:42px;text-align:center;font-size:15px;line-height:1.35;color:#eafff2}
 #mMsg b{color:var(--gold)}
-.dice{display:flex;gap:18px}
-.die{width:84px;height:84px;border-radius:16px;background-size:100% 100%;box-shadow:0 6px 0 rgba(0,0,0,.35),0 10px 18px rgba(0,0,0,.4)}
-.die.roll{animation:dieroll .18s linear infinite}
-@keyframes dieroll{from{transform:rotate(-12deg) translateY(-6px)}50%{transform:rotate(10deg) translateY(4px)}to{transform:rotate(-12deg) translateY(-6px)}}
-.puck{padding:8px 16px;border-radius:999px;font-weight:800;font-size:14px;letter-spacing:1px;background:#12040a;color:#f3dccf;border:2px solid #f3dccf}
-.puck.on{background:#fff;color:#12040a;border-color:#12040a;box-shadow:0 0 0 3px #e6bc68}
+.die{position:absolute;left:0;top:0;z-index:2;width:54px;height:54px;transform-style:preserve-3d;will-change:transform}
+.die i{position:absolute;inset:0;border-radius:9px;backface-visibility:hidden;background-size:100% 100%;box-shadow:inset 0 0 10px rgba(0,0,0,.18)}
+.die i:nth-child(1){transform:translateZ(27px)}.die i:nth-child(2){transform:rotateX(-90deg) translateZ(27px);filter:brightness(.9)}
+.die i:nth-child(3){transform:rotateY(90deg) translateZ(27px);filter:brightness(.82)}.die i:nth-child(4){transform:rotateY(-90deg) translateZ(27px);filter:brightness(.82)}
+.die i:nth-child(5){transform:rotateX(90deg) translateZ(27px);filter:brightness(.9)}.die i:nth-child(6){transform:rotateY(180deg) translateZ(27px)}
+.dsh{position:absolute;left:0;top:0;z-index:1;width:54px;height:54px;border-radius:14px;background:rgba(0,0,0,.5);filter:blur(5px);will-change:transform}
+/* street craps: an alley wall to throw against, concrete to bounce on */
+.street{position:relative;width:100%;flex:1;min-height:0;border-radius:14px;overflow:hidden;border:3px solid #12040a;touch-action:none;
+  background:radial-gradient(circle at 30% 70%,rgba(255,255,255,.06),transparent 40%),repeating-linear-gradient(90deg,transparent 0 118px,rgba(0,0,0,.28) 118px 120px),linear-gradient(#6f6c69,#55524f)}
+.street .wallb{position:absolute;left:0;right:0;top:0;height:24%;border-bottom:6px solid #2a1a14;box-shadow:0 10px 18px rgba(0,0,0,.45);
+  background:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,0)),repeating-linear-gradient(0deg,transparent 0 19px,#d9c9b3 19px 22px),repeating-linear-gradient(90deg,#8e3a2c 0 46px,#d9c9b3 46px 49px);background-color:#8e3a2c}
+.street .tag{position:absolute;left:0;right:0;top:5%;text-align:center;font-family:Pacifico,cursive;font-size:26px;line-height:1;color:#ffe08a;text-shadow:2px 2px 0 #12040a,0 0 14px rgba(0,0,0,.6);transform:rotate(-3deg)}
+.street .chalk{position:absolute;left:0;right:0;top:31%;text-align:center;font-family:Pacifico,cursive;color:rgba(255,255,255,.86);line-height:1.15;pointer-events:none}
+.street .chalk b{display:block;font-weight:400;font-size:44px}.street .chalk small{font-size:17px}
+.street .mybet{position:absolute;left:14px;bottom:12px;display:flex;align-items:flex-end;gap:6px;font-weight:800;color:#fff;text-shadow:0 1px 3px #000}
+.street .pbar{position:absolute;right:12px;top:30%;bottom:16px;width:16px;border-radius:999px;background:rgba(0,0,0,.5);border:2px solid #fff;overflow:hidden;opacity:0;transition:opacity .15s}
+.street .pbar.on{opacity:1}
+.street .pbar i{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(#ff4d6d,#ffe08a 55%,#8be28b)}
+.street .pbar::after{content:"POWER";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);font:800 9px var(--body);letter-spacing:2px;color:#fff;mix-blend-mode:difference}
+#crHand{position:absolute;z-index:3;left:50%;bottom:-236px;width:84px;margin-left:-42px;pointer-events:none;transform-origin:50% 100%}
+#crHand svg{display:block;width:100%;height:auto}
+/* five card draw: an oval table with a padded rail */
+.pkfelt{position:relative;width:100%;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:4px;padding:16px 10px 30px;border-radius:46% / 13%;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),radial-gradient(circle at 50% 45%,#27855c,#17573c);
+  border:11px solid #4a2216;box-shadow:inset 0 0 0 2px #e6bc68,inset 0 0 26px rgba(0,0,0,.45),0 0 0 3px #1b0906,0 10px 22px rgba(0,0,0,.5)}
+.pkfelt .tray{width:46%;height:16px;border-radius:0 0 8px 8px;background:#12040a;border:1px solid rgba(230,188,104,.6);border-top:0;display:flex;gap:2px;padding:0 4px 3px;margin-top:-16px}
+.pkfelt .tray i{flex:1;border-radius:0 0 2px 2px;background:repeating-linear-gradient(90deg,var(--c) 0 3px,rgba(255,255,255,.55) 3px 4px)}
+.pkfelt .arc{width:88%;height:auto;flex:none}
+.pkfelt .pot{display:flex;align-items:flex-end;gap:8px;min-height:44px;font-weight:800;color:#fff;text-shadow:0 1px 3px #000}
+.pkfelt h4{margin:0;font-size:10px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase;color:#d9f2e2;opacity:.85}
+#mStage .pkfelt .cards{--cw:50px;gap:5px}
+.pkfelt #pkP{padding-bottom:20px}
+.hc{position:relative;transition:transform .15s;cursor:pointer}
+.hc.held{transform:translateY(-11px)}
+.hc span{position:absolute;left:0;right:0;bottom:-18px;text-align:center;font:800 10px var(--body);letter-spacing:1.4px;color:var(--gold);opacity:0}
+.hc.held span{opacity:1}
 /* slot machine */
 #slot{position:fixed;inset:0;z-index:9;display:none;align-items:center;justify-content:center;background:rgba(10,2,4,.78);
   padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 12px)}
@@ -672,10 +702,10 @@ function slotPay(a,b,c){                 // total return as a multiple of the be
 const LR={
   W:[2,3,4,5,6,6,8,8,8],                 // lioness, tiara, paw, 22 medallion, ruby, acacia, moon, drum, feather
   PAY:[[.5,1.5,5],[.4,1,3],[.3,.8,2],[.25,.6,1.5],[.2,.5,1.2],[.2,.5,1.2],[.1,.25,.6],[.1,.25,.6],[.1,.25,.6]],
-  SCALE:4.4,PO:.115,PS:.075,Q:.085,Q2:.03,SWIPE:.0087,   // Q: chance an empty spot catches an orb on a respin; Q2 applies once 12 are showing
+  SCALE:4.4,PO:.108,PS:.07,Q:.085,Q2:.03,SWIPE:.0065,   // Q: chance an empty spot catches an orb on a respin; Q2 applies once 12 are showing
   PG:.028,GORB:.2,GFULL:.22,                // GFULL: when a gate lands in a column, the chance the whole column turns to gates                        // base game: chance a spot is a mystery gate, and the chance the gates hide orbs rather than a symbol
   ORB:[[.5,36],[1,30],[1.5,15],[2,9],[3,5],[5,2.5],['MINI',1.5],['MINOR',.5],['MAJOR',.08],['MEGA',.015]],
-  ORBB:[[.5,34],[1,30],[1.5,15],[2,9],[3,5],[5,2.5],['MINI',5],['MINOR',2],['MAJOR',.1],['MEGA',.02]],   // orbs that land during a bonus: Mini and Minor come up more
+  ORBB:[[.5,34],[1,30],[1.5,15],[2,9],[3,5],[5,2.5],['MINI',2.4],['MINOR',1.2],['MAJOR',.1],['MEGA',.02]],   // orbs that land during a bonus: Mini and Minor come up more
   JP:{MINI:10,MINOR:25,MAJOR:100,MEGA:400,GRAND:1000}
 };
 function lrOrb(rnd,bonus){const T=bonus?LR.ORBB:LR.ORB;let t=0;for(const o of T)t+=o[1];let r=rnd()*t;for(const o of T){r-=o[1];if(r<0)return o[0]}return .5}
@@ -758,6 +788,36 @@ function poker3(p,d,ante){                // player has played (ante plus an equ
   if(c>0)return{back:4*ante+bonus,note:'You beat the dealer. Both bets pay.'};
   if(c===0)return{back:2*ante+bonus,note:'Tie. Bets returned.'};
   return{back:bonus,note:'Dealer wins.'};
+}
+const PAY5=[0,1,2,3,4,6,9,25,50,250],HAND5=['No win','Jacks or better','Two pair','Three of a kind','Straight','Flush','Full house','Four of a kind','Straight flush','Royal flush'];
+function rank5(cards){                    // five card draw: index into PAY5 / HAND5
+  const v=cards.map(c=>c.r==='A'?14:c.r==='K'?13:c.r==='Q'?12:c.r==='J'?11:+c.r).sort((a,b)=>a-b),cnt={};
+  v.forEach(x=>cnt[x]=(cnt[x]||0)+1);
+  const groups=Object.values(cnt).sort((a,b)=>b-a),flush=cards.every(c=>c.s===cards[0].s),uniq=groups.length===5;
+  const straight=uniq&&(v[4]-v[0]===4||(v[4]===14&&v[3]===5));     // ace can play low
+  if(straight&&flush)return v[0]===10?9:8;
+  if(groups[0]===4)return 7;if(groups[0]===3&&groups[1]===2)return 6;if(flush)return 5;if(straight)return 4;
+  if(groups[0]===3)return 3;if(groups[0]===2&&groups[1]===2)return 2;
+  if(groups[0]===2&&+Object.keys(cnt).find(k=>cnt[k]===2)>=11)return 1;
+  return 0;
+}
+const HANDC=['high card','a pair','two pair','three of a kind','a straight','a flush','a full house','four of a kind','a straight flush'];
+function rank5c(cards){                   // comparable five card hand: category, then the cards that break ties
+  const v=cards.map(c=>c.r==='A'?14:c.r==='K'?13:c.r==='Q'?12:c.r==='J'?11:+c.r).sort((a,b)=>b-a),cnt={};
+  v.forEach(x=>cnt[x]=(cnt[x]||0)+1);
+  const tb=[...new Set(v)].sort((a,b)=>cnt[b]-cnt[a]||b-a),g=tb.map(x=>cnt[x]),flush=cards.every(c=>c.s===cards[0].s);
+  const wheel=tb.length===5&&v[0]===14&&v[1]===5,straight=tb.length===5&&(v[0]-v[4]===4||wheel),hi=wheel?5:v[0];
+  if(straight&&flush)return[8,hi];if(g[0]===4)return[7,...tb];if(g[0]===3&&g[1]===2)return[6,...tb];if(flush)return[5,...v];
+  if(straight)return[4,hi];if(g[0]===3)return[3,...tb];if(g[0]===2&&g[1]===2)return[2,...tb];if(g[0]===2)return[1,...tb];return[0,...v];
+}
+function dealerHold(cards){               // which cards the dealer keeps: made hands, then pairs, then four to a flush, then face cards
+  if(rank5c(cards)[0]>=4)return cards.map(()=>true);
+  const val=c=>c.r==='A'?14:c.r==='K'?13:c.r==='Q'?12:c.r==='J'?11:+c.r,cnt={},su={};
+  cards.forEach(c=>{cnt[val(c)]=(cnt[val(c)]||0)+1;su[c.s]=(su[c.s]||0)+1});
+  if(cards.some(c=>cnt[val(c)]>1))return cards.map(c=>cnt[val(c)]>1);
+  const fs=Object.keys(su).find(k=>su[k]===4);if(fs)return cards.map(c=>c.s===fs);
+  if(cards.some(c=>val(c)>=11))return cards.map(c=>val(c)>=11);
+  const top=Math.max(...cards.map(val));return cards.map(c=>val(c)===top);
 }
 /* </pure> */
 
@@ -1174,31 +1234,33 @@ function neon(x,y,t,size,col){
   <text x="${x}" y="${y}" text-anchor="middle" font-family="Limelight,serif" font-size="${size}" fill="#fff4e6" stroke="${col}" stroke-width="1.6">${t}</text>`;
 }
 function wallSVG(kind){
-  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400"><defs>
+  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 400" width="1120" height="400"><defs>
   <linearGradient id="cab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a1222"/><stop offset="1" stop-color="#1c0609"/></linearGradient>
   <linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c0810"/><stop offset=".55" stop-color="#4a0d1a"/><stop offset="1" stop-color="#22060c"/></linearGradient>
   <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d0b2e"/><stop offset=".6" stop-color="#8a2748"/><stop offset="1" stop-color="#f2a65a"/></linearGradient>
   <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a7350"/><stop offset=".5" stop-color="#e3cf9f"/><stop offset="1" stop-color="#7d6846"/></linearGradient>
   <radialGradient id="glow"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".75"/><stop offset="1" stop-color="#ffe2a0" stop-opacity="0"/></radialGradient></defs>
-  <rect width="800" height="400" fill="url(#wl)"/>`;
-  for(let x=0;x<800;x+=100)s+=`<rect x="${x+5}" y="34" width="90" height="330" rx="3" fill="rgba(0,0,0,.14)" stroke="rgba(230,188,104,.2)"/>
-   <circle cx="${x+50}" cy="150" r="34" fill="url(#glow)"/><rect x="${x+46}" y="142" width="8" height="16" rx="3" fill="#ffe9b8"/>`;
-  s+=`<rect width="800" height="22" fill="#12040a"/><rect y="22" width="800" height="3" fill="#e6bc68" opacity=".7"/><rect y="370" width="800" height="30" fill="#12040a"/>`;
+  <rect width="1120" height="400" fill="url(#wl)"/>`;
+  for(let x=0;x<1120;x+=140)s+=`<rect x="${x+6}" y="34" width="128" height="330" rx="3" fill="rgba(0,0,0,.14)" stroke="rgba(230,188,104,.2)"/>
+   <circle cx="${x+70}" cy="150" r="34" fill="url(#glow)"/><rect x="${x+66}" y="142" width="8" height="16" rx="3" fill="#ffe9b8"/>`;
+  s+=`<rect width="1120" height="22" fill="#12040a"/><rect y="22" width="1120" height="3" fill="#e6bc68" opacity=".7"/><rect y="370" width="1120" height="30" fill="#12040a"/>`;
   if(kind==='front'){
-    s+=`<circle cx="340" cy="58" r="15" fill="#12040a" stroke="#ff4d6d" stroke-width="2"/>${neon(340,64,'22',16,'#ff4d6d')}
-        <circle cx="460" cy="58" r="15" fill="#12040a" stroke="#e6bc68" stroke-width="2"/><text x="460" y="65" text-anchor="middle" font-size="18" fill="#ff4d6d">${HEART}</text>`;
+    const SU=[['\u2660\uFE0E','#12040a'],['\u2665\uFE0E','#cf1f3d'],['\u2663\uFE0E','#12040a'],['\u2666\uFE0E','#cf1f3d']];let n=0;
+    const row=(txt,y)=>[...txt].map((ch,k)=>{if(ch===' ')return'';const [su,col]=SU[n++%4],x=522+(k-(txt.length-1)/2)*41;
+      return `<g transform="translate(${x},${y}) rotate(${n%2?-3:3})"><rect x="-17" y="-25" width="34" height="50" rx="4" fill="#fdfaf3" stroke="#e6bc68" stroke-width="1.2"/><text y="8" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="25" fill="${col}">${ch}</text><text x="-11" y="-13" text-anchor="middle" font-size="9" fill="${col}">${su}</text><text x="11" y="21" text-anchor="middle" font-size="9" fill="${col}">${su}</text></g>`}).join('');
+    s+=row('CHEERS TO 22',66)+row('EMILY!',124);
   }else{
     const t={left:['RED','jack','#ff4d6d'],right:['K '+HEART+' E','09 \u00b7 20 \u00b7 26','#ffa3cf'],back:['HAPPY','22nd','#e6bc68']}[kind];
-    s+=`<rect x="250" y="40" width="300" height="100" rx="12" fill="#12040a" stroke="${t[2]}" stroke-width="2" opacity=".95"/>
-        ${neon(400,84,t[0],40,t[2])}${neon(400,126,t[1],kind==='right'?24:34,'#e6bc68')}`;
+    s+=`<rect x="410" y="40" width="300" height="100" rx="12" fill="#12040a" stroke="${t[2]}" stroke-width="2" opacity=".95"/>
+        ${neon(560,84,t[0],40,t[2])}${neon(560,126,t[1],kind==='right'?24:34,'#e6bc68')}`;
   }
-  for(let i=1;i<7;i++)if(!((kind==='back'||kind==='left')&&i>1&&i<6&&!(kind==='left'&&(i===2||i===5))))s+=slotSVG(12+i*100,i+(kind==='left'?1:kind==='right'?2:kind==='back'?3:0),kind,i);
-  if(kind==='left')s+=`<g class="elev"><rect x="318" y="150" width="164" height="222" rx="6" fill="#12040a" stroke="#e6bc68" stroke-width="3"/>
+  for(let i=1;i<7;i++)if(!((kind==='back'||kind==='left')&&i>1&&i<6&&!(kind==='left'&&(i===2||i===5))))s+=slotSVG(522+(i-3.5)*140,i+(kind==='left'?1:kind==='right'?2:kind==='back'?3:0),kind,i);
+  if(kind==='left')s+=`<g class="elev" transform="translate(160,0)"><rect x="318" y="150" width="164" height="222" rx="6" fill="#12040a" stroke="#e6bc68" stroke-width="3"/>
     <rect x="330" y="186" width="69" height="184" fill="url(#steel)" stroke="#8a6420"/><rect x="401" y="186" width="69" height="184" fill="url(#steel)" stroke="#8a6420"/>
     <rect x="366" y="158" width="68" height="22" rx="4" fill="#0b0204" stroke="#e6bc68"/><text x="400" y="175" text-anchor="middle" font-family="Limelight,serif" font-size="15" fill="#ff4d6d">22</text>
     <path d="M345 164l6 10h-12z" fill="#e6bc68"/><path d="M455 174l6-10h-12z" fill="#e6bc68" opacity=".4"/>
     <rect x="490" y="250" width="14" height="30" rx="4" fill="#12040a" stroke="#e6bc68"/><circle cx="497" cy="259" r="3.5" fill="#ffe08a"/><circle cx="497" cy="271" r="3.5" fill="#5a3a22"/></g>`;
-  if(kind==='back')for(let n=0;n<3;n++)s+=cabSVG(280+n*120,n);
+  if(kind==='back')for(let n=0;n<3;n++)s+=cabSVG(440+n*120,n);
   return s+'</svg>';
 }
 $('room').innerHTML=['front','left','right','back'].map(k=>`<div class="wall w-${k}">${wallSVG(k)}</div>`).join('')+'<div class="flat w-floor"></div><div class="flat w-ceil"></div>';
@@ -1206,9 +1268,9 @@ $('deck').innerHTML=backHTML();
 
 /* chairs, the man at his machine, and her seat */
 const ANG={front:0,left:90,right:-90,back:180},LRU=[-420,0,420];
-const slotU=i=>(i*100-350)*3.5;                           // a machine's position along its wall, in room units
-function place(el,w,u,d,top,sc){el.style.transform=`rotateY(${ANG[w]}deg) translate3d(${u}px,${top}px,${-(1400-d)}px) scale(${sc})`}
-function toRoom(w,u,d){const a=ANG[w]*Math.PI/180,z=-(1400-d);return [u*Math.cos(a)+z*Math.sin(a),-u*Math.sin(a)+z*Math.cos(a)]}
+const RM=1960,slotU=i=>(i-3.5)*490;                       // RM: centre to wall. slotU: a machine's position along its wall, in room units
+function place(el,w,u,d,top,sc){el.style.transform=`rotateY(${ANG[w]}deg) translate3d(${u}px,${top}px,${-(RM-d)}px) scale(${sc})`}
+function toRoom(w,u,d){const a=ANG[w]*Math.PI/180,z=-(RM-d);return [u*Math.cos(a)+z*Math.sin(a),-u*Math.sin(a)+z*Math.cos(a)]}
 const CHAIR=`<svg viewBox="0 0 85 165"><rect x="18" y="50" width="5" height="26" fill="#b98f3c"/><rect x="62" y="50" width="5" height="26" fill="#b98f3c"/>
  <rect x="11" y="2" width="63" height="54" rx="14" fill="#7a0d20" stroke="#e6bc68" stroke-width="2"/><rect x="19" y="10" width="47" height="38" rx="9" fill="#96132a"/>
  <rect x="39" y="80" width="7" height="72" fill="#c9a24e"/><ellipse cx="42.5" cy="126" rx="21" ry="5" fill="none" stroke="#c9a24e" stroke-width="3"/>
@@ -1258,7 +1320,7 @@ function person(kind,sit){                       // origin at the feet, facing +
 const VELVET='linear-gradient(#a3152d,#7a0d20)',BRASS='linear-gradient(90deg,#8a6420,#e6bc68,#8a6420)';
 const STOOL=part(0,-176,6,150,28,150,{all:VELVET,top:'radial-gradient(circle,#b3122c 0 55%,#7a0d20 100%)',skip:'B'})+part(0,-262,-64,140,116,22,{all:VELVET,skip:'B'})+
   part(0,-92,6,20,150,20,{all:BRASS,skip:'TB'})+part(0,-6,6,112,12,112,{all:'#120605',top:'radial-gradient(circle,#3a1a12,#120605)',skip:'B'});   // a real stool: seat, back, post and foot
-function placeFig(el,w,u,d,turn){el.style.transform=`rotateY(${ANG[w]}deg) translate3d(${u}px,700px,${-(1400-d)}px) rotateY(${turn}deg)`}
+function placeFig(el,w,u,d,turn){el.style.transform=`rotateY(${ANG[w]}deg) translate3d(${u}px,700px,${-(RM-d)}px) rotateY(${turn}deg)`}
 $('fig').innerHTML=`<div class="fig3" style="left:50%;transform:translateY(386px) scale3d(.62,.62,.62)">${person('dealer')}</div>`;
 // no chair behind the dealer, and none at the side-wall corners where two rows of chairs would collide
 function noSeat(w,i){return i<1||i>6||((w==='front'||w==='back')&&i>1&&i<6)||(w==='left'&&(i===3||i===4))}     // no machine in the corners, behind the dealer, behind the cabinets, or where the elevator is
@@ -1284,37 +1346,86 @@ const himReels=mkReels(),myReels=mkReels(),himCells=[...himReels.children],myCel
 
 /* he moves between machines: a few regular slots and the lioness cabinets */
 /* ---------- tables, cake and balloons in the room ---------- */
-const FELT=sv("<rect width='100' height='100' fill='#1f6b4a'/><ellipse cx='50' cy='50' rx='44' ry='40' fill='none' stroke='#e6bc68' stroke-width='1.2'/><rect x='36' y='60' width='8' height='14' rx='1.5' fill='#fbf3e4'/><rect x='46' y='60' width='8' height='14' rx='1.5' fill='#fbf3e4'/><rect x='56' y='60' width='8' height='14' rx='1.5' fill='#fbf3e4'/><rect x='41' y='22' width='8' height='14' rx='1.5' fill='#cf1f3d'/><rect x='51' y='22' width='8' height='14' rx='1.5' fill='#cf1f3d'/><circle cx='82' cy='50' r='4' fill='#e6bc68'/><circle cx='18' cy='50' r='4' fill='#cf1f3d'/>");
-const CRAPSF=sv("<rect width='100' height='100' fill='#1f6b4a'/><rect x='4' y='8' width='92' height='84' rx='6' fill='none' stroke='#fbf3e4' stroke-width='1.2'/><rect x='10' y='70' width='80' height='14' fill='none' stroke='#fbf3e4'/><text x='50' y='81' text-anchor='middle' font-size='9' font-weight='700' fill='#fbf3e4' font-family='sans-serif'>PASS LINE</text><text x='50' y='44' text-anchor='middle' font-size='16' font-weight='700' fill='#ffe08a' font-family='serif'>7 \u00b7 11</text>");
+const FELT_OLD=sv("<rect width='100' height='100' fill='#1f6b4a'/><ellipse cx='50' cy='50' rx='44' ry='40' fill='none' stroke='#e6bc68' stroke-width='1.2'/><rect x='36' y='60' width='8' height='14' rx='1.5' fill='#fbf3e4'/><rect x='46' y='60' width='8' height='14' rx='1.5' fill='#fbf3e4'/><rect x='56' y='60' width='8' height='14' rx='1.5' fill='#fbf3e4'/><rect x='41' y='22' width='8' height='14' rx='1.5' fill='#cf1f3d'/><rect x='51' y='22' width='8' height='14' rx='1.5' fill='#cf1f3d'/><circle cx='82' cy='50' r='4' fill='#e6bc68'/><circle cx='18' cy='50' r='4' fill='#cf1f3d'/>");
+const FELT=sv("<rect width='100' height='100' fill='#1f6b4a'/><rect x='5' y='7' width='90' height='86' rx='40' fill='none' stroke='#e6bc68' stroke-width='.8'/><path id='a' d='M18 52Q50 34 82 52' fill='none'/><text font-size='5.6' font-weight='700' fill='#ffe9c0' font-family='Georgia,serif' letter-spacing='.6'><textPath href='#a' startOffset='50%' text-anchor='middle'>FIVE CARD DRAW</textPath></text><g fill='#cf1f3d' stroke='#fbf3e4' stroke-width='.5'><rect x='29' y='14' width='7' height='11' rx='1'/><rect x='37.5' y='14' width='7' height='11' rx='1'/><rect x='46' y='14' width='7' height='11' rx='1'/><rect x='54.5' y='14' width='7' height='11' rx='1'/><rect x='63' y='14' width='7' height='11' rx='1'/></g><g fill='#fbf3e4' stroke='#b7a98f' stroke-width='.4'><rect x='29' y='72' width='7' height='11' rx='1'/><rect x='37.5' y='72' width='7' height='11' rx='1'/><rect x='46' y='72' width='7' height='11' rx='1'/><rect x='54.5' y='72' width='7' height='11' rx='1'/><rect x='63' y='72' width='7' height='11' rx='1'/></g><circle cx='46' cy='61' r='4' fill='#12040a' stroke='#fff' stroke-width='1' stroke-dasharray='1.6 1.4'/><circle cx='53' cy='62' r='4' fill='#cf1f3d' stroke='#fff' stroke-width='1' stroke-dasharray='1.6 1.4'/><circle cx='50' cy='58' r='4' fill='#a9812f' stroke='#fff' stroke-width='1' stroke-dasharray='1.6 1.4'/>");
+const CRAPSF=sv("<rect width='100' height='100' fill='#1f6b4a'/><rect x='4' y='8' width='92' height='84' rx='6' fill='none' stroke='#fbf3e4' stroke-width='1'/><g font-family='Georgia,serif' font-weight='700' text-anchor='middle'><text x='50' y='30' font-size='9' fill='#ffe9c0' letter-spacing='1.5'>STREET CRAPS</text><text x='50' y='54' font-size='12' fill='#ffe08a' letter-spacing='2'>7 \u00b7 11</text><text x='50' y='64' font-size='4.6' fill='#fbf3e4' letter-spacing='1.6'>WIN</text><text x='50' y='80' font-size='7' fill='#fbf3e4' letter-spacing='1.5'>2 \u00b7 3 \u00b7 12 LOSE</text></g>");
+const BRICK='repeating-linear-gradient(0deg,transparent 0 17px,#d9c9b3 17px 20px),repeating-linear-gradient(90deg,#8e3a2c 0 44px,#d9c9b3 44px 47px)';
+const ALLEY=sv("<rect width='100' height='100' fill='#636060'/><path d='M33 0V100M66 0V100' stroke='#3d3a38' stroke-width='.6'/><g font-family='Georgia,serif' font-style='italic' text-anchor='middle' fill='#fff' opacity='.88'><text x='50' y='34' font-size='7'>Street Craps</text><text x='50' y='58' font-size='15'>7 or 11</text><text x='50' y='70' font-size='5.4'>wins \u00b7 2, 3 or 12 loses</text></g>");
+const LEATHER='linear-gradient(#3a1a12,#1b0906)',RACK='repeating-linear-gradient(90deg,#cf1f3d 0 5px,#fbf3e4 5px 6px,#12040a 6px 11px,#fbf3e4 11px 12px,#a9812f 12px 17px,#fbf3e4 17px 18px)';
+const railed=(w,d)=>part(0,-446,-d/2+9,w,14,18,{all:LEATHER,skip:'B'})+part(0,-446,d/2-9,w,14,18,{all:LEATHER,skip:'B'})+part(-w/2+9,-446,0,18,14,d-36,{all:LEATHER,skip:'B'})+part(w/2-9,-446,0,18,14,d-36,{all:LEATHER,skip:'B'});
+const pokerTable=()=>tableTop(360,240,FELT)+railed(360,240)+part(0,-446,-78,130,12,34,{all:'#12040a',top:RACK,skip:'B'})+              // dealer chip tray
+  part(118,-445,-66,26,10,36,{all:'#e3d6bd',top:'linear-gradient(#cf1f3d,#7a0d20)',skip:'B'})+                                             // the deck
+  part(-96,-446,58,22,12,22,{all:'repeating-linear-gradient(#12040a 0 3px,#fff 3px 4px)',top:'radial-gradient(circle,#12040a 0 55%,#fff 56%)',skip:'B'});   // a chip stack
 const WOOD='linear-gradient(90deg,#1b0906,#4a2216 45%,#2c120c)',CLOTH='linear-gradient(#fff6ec,#f3d9cf)';
 const die=n=>sv(`<rect width='100' height='100' rx='16' fill='#fdfdfd' stroke='#bbb' stroke-width='3'/>${[[50,50],[25,25],[75,75],[25,75],[75,25],[25,50],[75,50]].filter((q,k)=>[[0],[1,2],[0,1,2],[1,2,3,4],[0,1,2,3,4],[1,2,3,4,5,6]][n-1].includes(k)).map(q=>`<circle cx='${q[0]}' cy='${q[1]}' r='9' fill='#b3122c'/>`).join('')}`);
 const tableTop=(w,d,top)=>part(0,-427,0,w,26,d,{top,all:WOOD,skip:'B'})+part(0,-207,0,w*.3,414,d*.34,{all:WOOD,skip:'TB'})+part(0,-5,0,w*.62,10,d*.7,{all:'#120605',top:'radial-gradient(circle,#3a1a12,#120605)',skip:'B'});
-const candle=x=>part(x,-668,0,30,46,6,{all:'transparent',front:sv("<text x='50' y='86' text-anchor='middle' font-size='112' font-weight='800' fill='#e6bc68' stroke='#8a6420' stroke-width='3' font-family='Georgia,serif'>2</text>"),back:sv("<text x='50' y='86' text-anchor='middle' font-size='112' font-weight='800' fill='#e6bc68' stroke='#8a6420' stroke-width='3' font-family='Georgia,serif'>2</text>"),skip:'TB'})+
-  part(x,-700,0,12,18,2,{all:'transparent',front:sv("<path d='M50 2Q90 60 50 98Q10 60 50 2Z' fill='#ffb347'/><path d='M50 40Q68 70 50 96Q32 70 50 40Z' fill='#fff3c9'/>"),back:sv("<path d='M50 2Q90 60 50 98Q10 60 50 2Z' fill='#ffb347'/>"),skip:'TB'});
+const WAX='repeating-linear-gradient(45deg,#ffe08a 0 4px,#ff9fc0 4px 8px)';
+const candle=x=>{                                // a "2" built from five wax bars, standing on the top tier, with a wick and flame
+  const bar=(dx,y,w,h)=>part(x+dx,y,0,w,h,8,{all:WAX});
+  return bar(0,-657,28,7)+bar(10.5,-646,7,15)+bar(0,-635,28,7)+bar(-10.5,-624,7,15)+bar(0,-613.5,28,7)+
+    part(x+10,-664,0,2,8,2,{all:'#3a2a1a',skip:'B'})+
+    part(x+10,-676,0,12,18,1,{all:'transparent',front:sv("<path d='M50 2Q92 60 50 98Q8 60 50 2Z' fill='#ffb347'/><path d='M50 40Q70 72 50 96Q30 72 50 40Z' fill='#fff3c9'/>"),back:sv("<path d='M50 2Q92 60 50 98Q8 60 50 2Z' fill='#ffb347'/><path d='M50 40Q70 72 50 96Q30 72 50 40Z' fill='#fff3c9'/>"),skip:'TB'})+
+    part(x+10,-676,0,1,18,12,{all:'transparent',left:sv("<path d='M50 2Q92 60 50 98Q8 60 50 2Z' fill='#ffb347'/>"),right:sv("<path d='M50 2Q92 60 50 98Q8 60 50 2Z' fill='#ffb347'/>"),skip:'TBFK'});
+};
+/* snack and drink tables for the other three corners */
+const SUITP={h:"<path d='M50 84C10 54 14 22 34 22C44 22 50 32 50 36C50 32 56 22 66 22C86 22 90 54 50 84Z' fill='#cf1f3d'/>",d:"<path d='M50 14L80 50L50 86L20 50Z' fill='#cf1f3d'/>",
+  s:"<path d='M50 14C90 46 86 74 66 74C58 74 52 68 50 64C48 68 42 74 34 74C14 74 10 46 50 14ZM44 66h12l6 22h-24z' fill='#12040a'/>",c:"<g fill='#12040a'><circle cx='50' cy='32' r='17'/><circle cx='32' cy='56' r='17'/><circle cx='68' cy='56' r='17'/><path d='M44 60h12l6 28h-24z'/></g>"};
+const tile=(k,bg,r)=>sv(`<rect width='100' height='100' rx='${r||0}' fill='${bg}'/>${SUITP[k]}`);
+const on=(x,z,w,h,d,f,lift)=>part(x,-430-(lift||0)-h/2,z,w,h,d,f);                 // something standing on a 430-high table
+const snackCloth=(c,top)=>part(0,-215,0,300,430,200,{all:c,top,skip:'B'});
+const GOLDT='linear-gradient(#ffe08a,#e6bc68)',SILVER='linear-gradient(90deg,#8a8f98,#e9edf2,#8a8f98)';
+const flute=(x,z)=>on(x,z,3,22,3,{all:'#f4f1ea',skip:'TB'})+on(x,z,13,30,13,{all:'linear-gradient(rgba(255,255,255,.35) 22%,rgba(255,214,120,.85) 22%)',top:'#fff3c9',skip:'B'},22);
+const cocktail=(x,z,k)=>on(x,z,24,30,24,{all:'linear-gradient(rgba(255,255,255,.4) 20%,#cf1f3d 20%)',top:tile(k,'#cf1f3d'),skip:'B'});
+const cupcake=(x,z,k,lift)=>on(x,z,24,12,24,{all:'repeating-linear-gradient(90deg,#e6bc68 0 3px,#a9812f 3px 6px)',skip:'TB'},lift)+on(x,z,28,12,28,{all:k==='h'||k==='d'?'#fff6ec':'#ff9fc0',top:tile(k,k==='h'||k==='d'?'#fff6ec':'#ff9fc0'),skip:'B'},(lift||0)+12);
+const cookie=(x,z,k)=>on(x,z,30,4,42,{all:'#e3c9a0',top:tile(k,'#fdfaf3',10),skip:'B'},4);
+const chips=(x,z,h,c)=>on(x,z,24,h,24,{all:`repeating-linear-gradient(${c} 0 3px,#fff 3px 4px)`,top:`radial-gradient(circle,${c} 0 50%,#fff 52% 60%,${c} 62%)`,skip:'B'},4);
+const soda=(x,z)=>on(x,z,24,40,24,{all:'linear-gradient(#cf1f3d 30%,#fff 30% 42%,#cf1f3d 42%)',top:'#fff',skip:'B'})+on(x+4,z,3,18,3,{all:'#fff',skip:'B'},40);
+const DRINKS=snackCloth('linear-gradient(#1d0a10,#12040a)','radial-gradient(circle,#3a0d18,#12040a)')+
+  on(-88,-10,70,56,70,{all:SILVER,top:'radial-gradient(circle,#eaf6ff,#b9d3e6)',skip:'B'})+on(-88,-10,24,70,24,{all:'linear-gradient(90deg,#0b2e20,#1f6b4a,#0b2e20)',front:sv("<rect width='100' height='100' fill='#14503a'/><rect x='12' y='40' width='76' height='44' fill='#fdfaf3'/><text x='50' y='72' text-anchor='middle' font-size='30' font-weight='700' font-family='Georgia,serif' fill='#cf1f3d'>22</text>"),skip:'B'},34)+
+  on(-88,-10,10,26,10,{all:GOLDT,skip:'B'},104)+
+  on(62,14,170,4,120,{all:BRASS,top:GOLDT,skip:'B'})+[[10,-18],[42,-18],[74,-18],[106,-18]].map(q=>flute(q[0],q[1])).join('')+
+  cocktail(14,40,'h')+cocktail(52,40,'s')+cocktail(90,40,'d')+cocktail(128,40,'c');
+const SNACKS=snackCloth('linear-gradient(#a3152d,#7a0d20)','radial-gradient(circle,#cf1f3d,#8a1024)')+
+  on(-92,-6,60,80,60,{all:'repeating-linear-gradient(90deg,#cf1f3d 0 10px,#fff 10px 20px)',top:'radial-gradient(circle at 30% 30%,#fff7d6 0 12%,transparent 13%),radial-gradient(circle at 68% 42%,#fff7d6 0 13%,transparent 14%),radial-gradient(circle at 44% 72%,#ffe9a8 0 13%,transparent 14%),#f3d98a',skip:'B'})+
+  on(-92,-6,48,14,48,{all:'#fff3c9',top:'radial-gradient(circle at 35% 40%,#fff 0 16%,transparent 17%),radial-gradient(circle at 66% 62%,#fff 0 16%,transparent 17%),#ffe9a8',skip:'B'},80)+
+  on(52,0,120,4,120,{all:'#fff',top:'radial-gradient(circle,#fff,#f0e4d6)',skip:'B'})+cupcake(16,-34,'h',4)+cupcake(88,-34,'s',4)+cupcake(16,34,'c',4)+cupcake(88,34,'d',4)+
+  on(52,0,8,44,8,{all:BRASS,skip:'TB'},4)+on(52,0,64,4,64,{all:'#fff',top:'radial-gradient(circle,#fff,#f0e4d6)'},48)+cupcake(52,0,'h',52)+
+  on(-20,62,70,22,50,{all:'linear-gradient(#12040a,#3a1a12)',top:'repeating-linear-gradient(45deg,#8a5a2a 0 5px,#c98f4a 5px 9px,#5a3416 9px 12px)',skip:'B'});
+const SWEETS=snackCloth('linear-gradient(#1f6b4a,#14503a)','radial-gradient(circle,#27855c,#17573c)')+
+  on(-78,-8,130,4,110,{all:BRASS,top:GOLDT,skip:'B'})+chips(-118,-36,26,'#3a1a12')+chips(-84,-36,36,'#5a3416')+chips(-50,-36,18,'#f3e2c0')+chips(-118,6,14,'#f3e2c0')+chips(-84,6,22,'#3a1a12')+
+  cookie(30,-40,'s')+cookie(68,-40,'h')+cookie(106,-40,'c')+cookie(30,12,'d')+cookie(68,12,'s')+cookie(106,12,'h')+on(68,-14,130,4,110,{all:'#fff',top:'#fdfaf3',skip:'B'})+
+  on(-44,58,30,30,30,{all:die(5),top:die(6),skip:'B'})+on(-6,64,30,30,30,{all:die(2),top:die(3),skip:'B'})+soda(70,66)+soda(108,66);
 const PROPS=[
-  {id:'pokerA',x:-360,z:300,r:210,html:tableTop(340,220,FELT)},
-  {id:'pokerB',x:360,z:300,r:210,html:tableTop(340,220,FELT)},
-  {id:'craps',x:-760,z:720,r:260,html:tableTop(460,230,CRAPSF)+part(0,-462,-108,460,44,14,{all:WOOD,skip:'B'})+part(0,-462,108,460,44,14,{all:WOOD,skip:'B'})+part(-223,-462,0,14,44,202,{all:WOOD,skip:'B'})+part(223,-462,0,14,44,202,{all:WOOD,skip:'B'})+
-     part(-40,-453,10,26,26,26,{all:die(5),top:die(3),skip:'B'})+part(8,-453,-22,26,26,26,{all:die(2),top:die(4),skip:'B'})},
-  {id:'cake',x:760,z:720,r:230,html:part(0,-215,0,300,430,200,{all:CLOTH,top:'radial-gradient(circle,#fff,#f6dfe0)',skip:'B'})+
+  {id:'pokerA',x:-780,z:-300,r:230,html:pokerTable()},
+  {id:'pokerB',x:780,z:-300,r:230,html:pokerTable()},
+  {id:'craps',x:0,z:760,r:290,rot:180,html:tableTop(460,260,ALLEY)+part(0,-520,-121,460,160,18,{all:BRICK,top:'#2a1a14',skip:'B'})+        // the alley wall to throw against
+     part(-223,-449,9,14,18,242,{all:'#3d3a38',skip:'B'})+part(223,-449,9,14,18,242,{all:'#3d3a38',skip:'B'})+part(0,-449,123,460,18,14,{all:'#3d3a38',skip:'B'})+
+     part(-46,-453,6,26,26,26,{all:die(5),top:die(3),skip:'B'})+part(14,-453,-40,26,26,26,{all:die(2),top:die(4),skip:'B'})+
+     part(150,-444,70,22,8,22,{all:'repeating-linear-gradient(#12040a 0 3px,#fff 3px 4px)',top:'radial-gradient(circle,#12040a 0 55%,#fff 56%)',skip:'B'})},
+  {id:'cake',x:1690,z:1700,r:215,rot:180,html:part(0,-215,0,300,430,200,{all:CLOTH,top:'radial-gradient(circle,#fff,#f6dfe0)',skip:'B'})+
      part(0,-465,0,150,70,150,{all:'linear-gradient(#ff9fc0 30%,#fff6ec 30% 38%,#f7b7cf 38%)',top:'#ffc2d6',skip:'B'})+part(0,-530,0,110,60,110,{all:'linear-gradient(#fff6ec 28%,#ff9fc0 28% 36%,#fff6ec 36%)',top:'#fff6ec',skip:'B'})+
-     part(0,-585,0,72,50,72,{all:'linear-gradient(#ff9fc0 30%,#fff6ec 30% 40%,#f7b7cf 40%)',top:'#ffc2d6',skip:'B'})+candle(-17)+candle(17)+
-     part(-108,-436,56,56,6,56,{all:'#fff',top:'radial-gradient(circle,#ff9fc0 0 34%,#fff 36%)',skip:'B'})+part(108,-436,-50,56,6,56,{all:'#fff',top:'radial-gradient(circle,#fff6ec 0 34%,#fff 36%)',skip:'B'})}
+     part(0,-585,0,72,50,72,{all:'linear-gradient(#ff9fc0 30%,#fff6ec 30% 40%,#f7b7cf 40%)',top:'#ffc2d6',skip:'B'})+candle(-18)+candle(18)+
+     part(-108,-436,56,56,6,56,{all:'#fff',top:'radial-gradient(circle,#ff9fc0 0 34%,#fff 36%)',skip:'B'})+part(108,-436,-50,56,6,56,{all:'#fff',top:'radial-gradient(circle,#fff6ec 0 34%,#fff 36%)',skip:'B'})},
+  {id:'snackA',x:-1690,z:1700,r:215,rot:180,html:DRINKS},
+  {id:'snackB',x:-1690,z:-1700,r:215,html:SNACKS},
+  {id:'snackC',x:1690,z:-1700,r:215,html:SWEETS}
 ];
 (function(){
   let h='';
-  for(const p of PROPS)h+=`<div class="fig3 prop" data-prop="${p.id}" style="transform:translate3d(${p.x}px,700px,${p.z}px)">${p.html}</div>`;
+  for(const p of PROPS)h+=`<div class="fig3 prop" data-prop="${p.id}" style="transform:translate3d(${p.x}px,700px,${p.z}px) rotateY(${p.rot||0}deg)">${p.html}</div>`;
   for(const p of PROPS.slice(0,2))h+=`<div class="fig3" style="transform:translate3d(${p.x}px,700px,${p.z-175}px)">${person('dealer')}</div><div class="fig3 stool" style="transform:translate3d(${p.x}px,700px,${p.z+190}px) rotateY(180deg)">${STOOL}</div>`;
-  const B=(cx,cy,r,col,t,fs,tc)=>`<path d="M${cx} ${cy+r*1.18}Q${cx+12} ${cy+r*2.4} 150 500" fill="none" stroke="#f3dccf" stroke-width="1.6" opacity=".7"/><ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*1.18}" fill="${col}"/><ellipse cx="${cx-r*.34}" cy="${cy-r*.42}" rx="${r*.2}" ry="${r*.32}" fill="#fff" opacity=".4"/><path d="M${cx-5} ${cy+r*1.18}h10l-5 9z" fill="${col}"/><text x="${cx}" y="${cy+fs*.36}" text-anchor="middle" font-size="${fs}" font-weight="800" font-family="Georgia,serif" fill="${tc}">${t}</text>`;
-  const SETS=[[['#cf1f3d','\u2665\uFE0E',54,'#fff'],['#12040a','A\u2660\uFE0E',38,'#e6bc68'],['#e6bc68','HAPPY',21,'#3a0f14'],['#f7e9d2','\u2663\uFE0E',54,'#12040a'],['#ff9fc0','22',44,'#7a0d20']],
-    [['#12040a','\u2660\uFE0E',54,'#f7e9d2'],['#cf1f3d','A\u2665\uFE0E',38,'#fff'],['#e6bc68','BIRTHDAY',15,'#3a0f14'],['#ff9fc0','\u2666\uFE0E',54,'#cf1f3d'],['#f7e9d2','22',44,'#cf1f3d']]];
-  const spots=[[66,150,56],[226,128,60],[150,70,58],[94,280,50],[214,270,52]];
-  [[-1270,-1270],[1270,-1270],[-1270,1270],[1270,1270]].forEach((c,n)=>{
-    h+=`<div class="bln" data-x="${c[0]}" data-z="${c[1]}"><svg viewBox="0 0 300 520" style="animation-delay:${-n*1.3}s">${SETS[n%2].map((b,k)=>B(spots[k][0],spots[k][1],spots[k][2],b[0],b[1],b[2],b[3])).join('')}<rect x="132" y="498" width="36" height="20" rx="4" fill="#e6bc68"/></svg></div>`});
+  const B=(cx,cy,r,col,t,fs,tc)=>`<path d="M${cx} ${cy+r*1.18}Q${cx+12} ${cy+r*2.4} 150 500" fill="none" stroke="#f3dccf" stroke-width="1.6" opacity=".7"/><ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*1.18}" fill="${col}"/><ellipse cx="${cx-r*.34}" cy="${cy-r*.42}" rx="${r*.2}" ry="${r*.32}" fill="#fff" opacity=".4"/><path d="M${cx-5} ${cy+r*1.18}h10l-5 9z" fill="${col}"/>`+
+    (t==='HB'?`<text text-anchor="middle" font-family="Pacifico,'Brush Script MT',cursive" fill="${tc}"><tspan x="${cx}" y="${cy-3}" font-size="${fs}">Happy</tspan><tspan x="${cx}" y="${cy+fs*1.02}" font-size="${fs}">Birthday!</tspan></text>`
+      :`<text x="${cx}" y="${cy+fs*.36}" text-anchor="middle" font-size="${fs}" font-family="${/\d/.test(t)?"Pacifico,'Brush Script MT',cursive":'Georgia,serif'}" font-weight="${/\d/.test(t)?400:800}" fill="${tc}">${t}</text>`);
+  const SETS=[[['#cf1f3d','\u2665\uFE0E',54,'#fff'],['#12040a','A\u2660\uFE0E',38,'#e6bc68'],['#e6bc68','HB',23,'#7a0d20'],['#f7e9d2','\u2663\uFE0E',54,'#12040a'],['#ff9fc0','22',44,'#7a0d20']],
+    [['#12040a','\u2660\uFE0E',54,'#f7e9d2'],['#cf1f3d','A\u2665\uFE0E',38,'#fff'],['#e6bc68','HB',23,'#7a0d20'],['#ff9fc0','\u2666\uFE0E',54,'#cf1f3d'],['#f7e9d2','22',44,'#cf1f3d']]];
+  const spots=[[62,170,54],[232,150,56],[150,76,70],[94,292,50],[214,284,52]];
+  [[-1805,-1765,-250],[1805,-1765,-250],[-1805,1765,-250],[1805,1765,-250]].forEach((c,n)=>{      // each bunch is tied to the back corner of its corner table
+    h+=`<div class="bln" data-x="${c[0]}" data-z="${c[1]}" data-y="${c[2]}"><svg viewBox="0 0 300 520" style="animation-delay:${-n*1.3}s">${SETS[n%2].map((b,k)=>B(spots[k][0],spots[k][1],spots[k][2],b[0],b[1],b[2],b[3])).join('')}<rect x="132" y="498" width="36" height="20" rx="4" fill="#e6bc68"/></svg></div>`});
   $('room').insertAdjacentHTML('beforeend',h);
 })();
 const blns=[...document.querySelectorAll('.bln')];
-function faceBalloons(){for(const b of blns)b.style.transform=`translate3d(${b.dataset.x}px,${700-620}px,${b.dataset.z}px) rotateY(${(-yaw).toFixed(1)}deg)`}
+function faceBalloons(){for(const b of blns)b.style.transform=`translate3d(${b.dataset.x}px,${b.dataset.y}px,${b.dataset.z}px) rotateY(${(-yaw).toFixed(1)}deg)`}
 /* cake: a slice makes you lucky for three minutes */
 let luckUntil=0;
 const lucky=()=>Date.now()<luckUntil;
@@ -1322,6 +1433,9 @@ function luckTick(){const el=$('luck'),left=Math.ceil((luckUntil-Date.now())/100
 setInterval(luckTick,500);
 function propTap(id){
   if(id==='cake'){luckUntil=Date.now()+180000;luckTick();chime(.7);return toast('You ate a slice of cake. +15% luck for 3 minutes!')}
+  if(id==='snackA')return toast('Champagne and cocktails. Cheers to 22!');
+  if(id==='snackB')return toast('Popcorn, pretzels and cupcakes. Help yourself!');
+  if(id==='snackC')return toast('Chocolate chips, card cookies and sugar dice.');
   if(id==='craps')return miniOpen('craps');
   return miniOpen('poker');
 }
@@ -1376,15 +1490,16 @@ let yaw=0,pitch=0,cx=0,cz=0,cy=0,lookOn=false,held=false,dragged=false,pressStar
 const joy=[0,0],keys=new Set();
 const pts=new Map();
 function applyView(){face();faceBalloons();world.style.transform=`translateZ(700px) rotateX(${pitch.toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg) translate3d(${(-cx).toFixed(1)}px,${(-cy).toFixed(1)}px,${(-cz).toFixed(1)}px) translateZ(-700px)`}   // cy lifts the camera (negative is up)
-let tbl={hw:300,near:-500,far:-1100};
+const TZ=-150;                                   // how far forward of the seated camera the table stands
+let tbl={hw:300,near:-850,far:-1450};
 function stand(){                                // tip the table flat, stand the dealer and the player up, step back to see it
   const app=$('app'),wood=document.querySelector('.wood'),fig=$('fig'),H=$('scene').clientHeight;
   const wt=wood.offsetTop,wh=wood.offsetHeight,ww=wood.offsetWidth,k=Math.min(1.5,560/wh),oy=wt+wh,floor=H/2+700;
   app.style.transformOrigin=`50% ${oy}px`;
-  app.style.transform=`translate3d(0,${H/2+260-oy}px,200px) rotateX(90deg) scale(${k})`;
+  app.style.transform=`translate3d(0,${H/2+260-oy}px,${TZ}px) rotateX(90deg) scale(${k})`;
   wood.style.setProperty('--ph',(440/k-22)+'px');
-  const farZ=200-wh*k;
-  tbl={hw:ww*k/2,near:-500,far:farZ-700};
+  const farZ=TZ-wh*k;
+  tbl={hw:ww*k/2,near:TZ-700,far:farZ-700};
   const fk=1.6;figT=[`translate3d(0,${floor-386*fk-fig.offsetTop}px,${farZ-90}px)`,`scale3d(${fk},${fk},${fk})`];
   face();
 }
@@ -1396,7 +1511,7 @@ function face(){                                 // the dealer and the player tu
 function enterLook(spawn){
   lookOn=true;document.body.classList.add('looking');$('lookT').textContent='Sit at table';
   stand();
-  world.style.transition='transform .7s cubic-bezier(.3,.7,.2,1)';if(spawn===true){cx=0;cz=420;yaw=0;pitch=-9}else{cx=0;cz=-110;yaw=0;pitch=-19}     // the game opens standing mid-room; the Look button stands you up at the table
+  world.style.transition='transform .7s cubic-bezier(.3,.7,.2,1)';if(spawn===true){cx=0;cz=260;yaw=0;pitch=-8}else{cx=0;cz=-460;yaw=0;pitch=-19}     // the game opens standing mid-room; the Look button stands you up at the table
   applyView();
   setTimeout(()=>{if(lookOn&&!seated){world.style.transition='none';$('fig').style.transition='none'}},720);
   if(!bgOn){bgOn=true;bgSpin()}
@@ -1415,7 +1530,7 @@ function walk(t){
     if(len>.02||turn){
       yaw+=turn*95*dt;
       const th=yaw*Math.PI/180,v=560*dt;
-      const nx=Math.max(-1150,Math.min(1150,cx+(Math.sin(th)*f+Math.cos(th)*r)*v)),nz=Math.max(-1150,Math.min(1150,cz+(-Math.cos(th)*f+Math.sin(th)*r)*v));
+      const nx=Math.max(-1700,Math.min(1700,cx+(Math.sin(th)*f+Math.cos(th)*r)*v)),nz=Math.max(-1700,Math.min(1700,cz+(-Math.cos(th)*f+Math.sin(th)*r)*v));
       if(!blocked(nx,nz)){cx=nx;cz=nz}else if(!blocked(nx,cz))cx=nx;else if(!blocked(cx,nz))cz=nz;     // slide along the table
       applyView();
     }
@@ -1527,7 +1642,7 @@ function sitAt(w,i,lr){                           // sit her down and frame her 
   placeFig($('meSit'),w,u,220,180);
   myReels.classList.toggle('on',!isLr);myReels.classList.remove('win');
   if(!isLr){place(myReels,w,u,5,154,.875);myCells.forEach((c,k)=>c.innerHTML=symHTML([0,1,0][k]))}
-  const cam=toRoom(w,Math.max(-1150,Math.min(1150,u+side*(isLr?300:760))),isLr?640:900),tg=toRoom(w,u+side*70,0);
+  const cam=toRoom(w,Math.max(-1700,Math.min(1700,u+side*(isLr?300:760))),isLr?640:900),tg=toRoom(w,u+side*70,0);
   let ny=Math.atan2(tg[0]-cam[0],-(tg[1]-cam[1]))*180/Math.PI;
   ny+=Math.round((yaw-ny)/360)*360;                // turn the short way
   world.style.transition='transform .85s cubic-bezier(.3,.7,.2,1)';
@@ -1695,6 +1810,17 @@ function roarSnd(){
     og.gain.setValueAtTime(.0001,t);og.gain.exponentialRampToValueAtTime(.2,t+.2);og.gain.exponentialRampToValueAtTime(.0001,t+1.25);
     const f2=actx.createBiquadFilter();f2.type='lowpass';f2.frequency.value=420;
     o.connect(f2).connect(og).connect(actx.destination);o.start(t);lfo.start(t);o.stop(t+1.3);lfo.stop(t+1.3);
+  }catch(e){}
+}
+function orbHit(){                                 // an orb slamming onto the grid: a gritty low thud with a burst of noise on top
+  if(!actx||actx.state!=='running')return;
+  try{const t=actx.currentTime,sh=actx.createWaveShaper(),c=new Float32Array(256);for(let i=0;i<256;i++){const x=i/128-1;c[i]=Math.tanh(x*6)}sh.curve=c;
+    const out=actx.createGain();out.gain.value=.85;sh.connect(out).connect(actx.destination);
+    const o=actx.createOscillator(),g=actx.createGain();o.type='sawtooth';o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(42,t+.22);
+    g.gain.setValueAtTime(.9,t);g.gain.exponentialRampToValueAtTime(.0001,t+.34);o.connect(g).connect(sh);o.start(t);o.stop(t+.36);
+    const n=actx.createBufferSource(),b=actx.createBuffer(1,actx.sampleRate*.2,actx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);
+    const f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=900;f.Q.value=.7;const ng=actx.createGain();ng.gain.setValueAtTime(.8,t);ng.gain.exponentialRampToValueAtTime(.0001,t+.18);
+    n.buffer=b;n.connect(f).connect(ng).connect(sh);n.start(t);
   }catch(e){}
 }
 function thock(){
@@ -1893,7 +2019,7 @@ async function lrBonus(g,bet,why,base){
   const add=lrTopUp(orbs,Math.random);
   if(add.length){lrSwipe();await sleep(380)}
   for(let i=0;i<15;i++){const c=lrCells[i];if(orbs[i]==null){c.className='lc dark';c.innerHTML=''}else{c.className='lc held'+(add.includes(i)?' drop':'');c.innerHTML=lrCellHTML({o:orbs[i]},bet)}}
-  if(add.length)thock();
+  if(add.length)orbHit();
   await sleep(700);
   let total=0;
   const collect=async i=>{                        // every orb goes straight into the win as it is collected
@@ -1917,7 +2043,7 @@ async function lrBonus(g,bet,why,base){
       await sleep(430);
       if(empty.length===1)await lrTease(x,1600);                     // one orb short of the Grand
       const landed=[];
-      for(const i of col){const c=lrCells[i];if(hit.includes(i)){c.className='lc held drop';c.innerHTML=lrCellHTML({o:orbs[i]},bet);thock();landed.push(i)}else{c.className='lc dark';c.innerHTML=''}}
+      for(const i of col){const c=lrCells[i];if(hit.includes(i)){c.className='lc held drop';c.innerHTML=lrCellHTML({o:orbs[i]},bet);orbHit();landed.push(i)}else{c.className='lc dark';c.innerHTML=''}}
       flick(.5);
       if(landed.length){await sleep(300);for(const i of landed)await collect(i)}
     }
@@ -2016,77 +2142,143 @@ document.querySelectorAll('.pk').forEach(b=>b.onclick=()=>{
 });
 pickUI();
 
-/* ---------- craps and three card poker ---------- */
+/* ---------- street craps and five card draw ---------- */
 const svCss=b=>sv(b).replace(/&quot;/g,'"');
-const DIE=[1,2,3,4,5,6].map(n=>svCss(`<rect width='100' height='100' rx='16' fill='#fdfdfd'/>${[[50,50],[25,25],[75,75],[25,75],[75,25],[25,50],[75,50]].filter((q,k)=>[[0],[1,2],[0,1,2],[1,2,3,4],[0,1,2,3,4],[1,2,3,4,5,6]][n-1].includes(k)).map(q=>`<circle cx='${q[0]}' cy='${q[1]}' r='9.5' fill='#b3122c'/>`).join('')}`));
-const mg={kind:'',bet:25,busy:false,point:null,live:0,stage:'bet',p:[],d:[],deck:[]};
+const DIE=[1,2,3,4,5,6].map(n=>svCss(`<rect width='100' height='100' rx='16' fill='#fdfdfd' stroke='#c9c9c9' stroke-width='3'/>${[[50,50],[25,25],[75,75],[25,75],[75,25],[25,50],[75,50]].filter((q,k)=>[[0],[1,2],[0,1,2],[1,2,3,4],[0,1,2,3,4],[1,2,3,4,5,6]][n-1].includes(k)).map(q=>`<circle cx='${q[0]}' cy='${q[1]}' r='9.5' fill='#b3122c'/>`).join('')}`));
+const mg={kind:'',bet:25,busy:false,point:null,live:0,stage:'bet',p:[],d:[],deck:[],hold:[]};
 function miniUI(msg){
   $('mBank').textContent=fmtB(S.bank);
   if(msg!==undefined)$('mMsg').innerHTML=msg;
-  const lock=mg.busy||(mg.kind==='craps'?mg.point!=null:mg.stage==='decide');
+  const lock=mg.busy||(mg.kind==='craps'?mg.point!=null:mg.stage==='hold');
   document.querySelectorAll('#mBets button').forEach(b=>{b.classList.toggle('on',+b.dataset.mb===mg.bet);b.textContent=short(+b.dataset.mb);b.disabled=lock});
   const a=$('mA'),b=$('mB');
-  if(mg.kind==='craps'){a.textContent='Leave';a.disabled=mg.busy||mg.point!=null;b.textContent=mg.point==null?'Roll':'Roll for '+mg.point;b.disabled=mg.busy||(mg.point==null&&S.bank<mg.bet)}
-  else if(mg.stage==='decide'){a.textContent='Fold';a.disabled=mg.busy;b.textContent='Play '+short(mg.bet);b.disabled=mg.busy||S.bank<mg.bet}
+  if(mg.kind==='craps'){
+    a.textContent='Leave';a.disabled=mg.busy||mg.point!=null;b.textContent=mg.point==null?'Hold to throw':'Hold to throw for '+mg.point;b.disabled=mg.busy||(mg.point==null&&S.bank<mg.bet);
+    const ch=$('chalk');if(ch)ch.innerHTML=mg.point==null?'<small>First roll</small><b>7 or 11</b><small>wins · 2, 3 or 12 loses</small>':`<small>Your point is</small><b>${mg.point}</b><small>roll it again to win · a 7 loses</small>`;
+    const mb=$('mybet');if(mb)mb.innerHTML=mg.live?stackHTML(mg.live)+`<span>${fmtC(mg.live)} riding</span>`:'';
+  }
+  else if(mg.stage==='hold'){a.textContent='Leave';a.disabled=true;b.textContent='Draw';b.disabled=mg.busy}
   else{a.textContent='Leave';a.disabled=mg.busy;b.textContent='Deal';b.disabled=mg.busy||S.bank<mg.bet}
+  const pot=$('pkPot');if(pot)pot.innerHTML=mg.stage==='bet'?'':stackHTML(mg.bet*2)+`<span>Pot ${fmtC(mg.bet*2)}</span>`;
 }
 function miniOpen(kind){
-  mg.kind=kind;mg.busy=false;mg.point=null;mg.stage='bet';keys.clear();
-  $('mTitle').textContent=kind==='craps'?'Street Craps':'Three Card Poker';
-  $('mBets').innerHTML='<span style="color:#d9f2e2">'+(kind==='craps'?'Bet':'Ante')+'</span>'+[5,25,100,500,1000,5000].map(v=>`<button data-mb="${v}"></button>`).join('');
+  mg.kind=kind;mg.busy=false;mg.point=null;mg.live=0;mg.stage='bet';keys.clear();
+  $('mTitle').textContent=kind==='craps'?'Street Craps':'Five Card Draw';
+  $('mBets').innerHTML='<span style="color:#d9f2e2">Bet</span>'+[5,25,100,500,1000,5000].map(v=>`<button data-mb="${v}"></button>`).join('');
   if(kind==='craps'){
-    $('mStage').innerHTML='<span class="puck" id="puck">POINT OFF</span><div class="dice"><div class="die" id="die0"></div><div class="die" id="die1"></div></div><h4>7 or 11 wins on the first roll</h4>';
-    $('die0').style.background=DIE[2];$('die1').style.background=DIE[3];
-    miniUI('Pick a bet and roll. 7 or 11 wins, 2, 3 or 12 loses. Anything else becomes your point: roll it again before a 7.');
+    $('mStage').innerHTML='<div class="street" id="pit"><div class="wallb"></div><div class="tag">Street Craps</div><div class="chalk" id="chalk"></div><div class="dsh" id="dsh0"></div><div class="dsh" id="dsh1"></div><div class="die" id="die0"></div><div class="die" id="die1"></div><div class="mybet" id="mybet"></div><div class="pbar" id="pbar"><i></i></div><div id="crHand"></div></div>';
+    $('crHand').innerHTML=$('hand').innerHTML;const hc=$('crHand').querySelector('#handchip');if(hc)hc.remove();
+    for(let k=0;k<2;k++)$('die'+k).innerHTML=[1,2,3,4,5,6].map(n=>`<i style='background:${DIE[n-1]}'></i>`).join('');
+    miniUI('Hold the button to wind up, let go to throw. 7 or 11 wins the first roll. 2, 3 or 12 loses. Any other number is your point: roll it again before a 7.');
   }else{
-    $('mStage').innerHTML='<h4>Dealer</h4><div class="cards show" id="pkD"></div><div class="cards show" id="pkP"></div><h4>You</h4>';
-    $('pkD').innerHTML=backHTML()+backHTML()+backHTML();$('pkP').innerHTML=backHTML()+backHTML()+backHTML();
-    miniUI('Ante up and deal. Then play (a second bet the same size) or fold. The dealer needs queen high to qualify.');
+    $('mStage').innerHTML='<div class="pkfelt"><div class="tray"><i style="--c:#f7e9d2"></i><i style="--c:#b3122c"></i><i style="--c:#b3122c"></i><i style="--c:#1d1114"></i><i style="--c:#a9812f"></i><i style="--c:#1d1114"></i><i style="--c:#b3122c"></i><i style="--c:#f7e9d2"></i></div><h4>Dealer</h4><div class="cards show" id="pkD"></div><svg class="arc" viewBox="0 0 400 62" aria-hidden="true"><path id="pka" d="M30 52Q200 4 370 52" fill="none" stroke="rgba(230,188,104,.55)"/><text font-family="Limelight,serif" font-size="27" fill="#ffe9c0" letter-spacing="3"><textPath href="#pka" startOffset="50%" text-anchor="middle">FIVE CARD DRAW</textPath></text></svg><div class="pot" id="pkPot"></div><div class="cards show" id="pkP"></div></div>';
+    $('pkD').innerHTML=backHTML().repeat(5);$('pkP').innerHTML=backHTML().repeat(5);
+    miniUI('Bet and deal. Keep the cards you like, draw new ones for the rest, then beat the dealer’s hand to win. A tie returns your bet.');
   }
   $('mini').classList.add('open');
+  if(kind==='craps')diceRest();                 // placed once the alley is on screen and has a size
 }
-async function crapsRoll(){
+/* craps: hold to charge, release to throw; the dice fly at the wall and bounce around the alley */
+const dice=[{},{}];let charge=null;
+const FACE=[[0,0],[90,0],[0,-90],[0,90],[-90,0],[0,180]];            // the turn that brings each number face up
+function dieDraw(k){const d=dice[k];
+  $('die'+k).style.transform=`translate(${(d.x-27).toFixed(1)}px,${(d.y-27-d.h*.5).toFixed(1)}px) perspective(700px) scale(${(1+d.h/260).toFixed(3)}) rotateZ(${d.a.toFixed(1)}deg) rotateX(${d.rx.toFixed(1)}deg) rotateY(${d.ry.toFixed(1)}deg)`;
+  $('dsh'+k).style.transform=`translate(${(d.x-27+4+d.h*.25).toFixed(1)}px,${(d.y-27+6+d.h*.6).toFixed(1)}px) rotate(${d.a.toFixed(0)}deg) scale(${(1+d.h/160).toFixed(2)})`;$('dsh'+k).style.opacity=(1-d.h/200).toFixed(2)}
+function diceRest(){const pit=$('pit'),W=pit.clientWidth,H=pit.clientHeight;dice.forEach((d,k)=>{d.x=W/2+(k?34:-34);d.y=H*.7;d.a=k?12:-9;d.h=0;if(d.n==null)d.n=k?4:3;[d.rx,d.ry]=FACE[d.n-1];dieDraw(k)})}
+function chargeStart(e){
+  if(mg.kind!=='craps'||mg.busy||charge||(mg.point==null&&S.bank<mg.bet))return;
+  e.preventDefault();try{$('mB').setPointerCapture(e.pointerId)}catch(_){}
+  const t0=performance.now(),bar=$('pbar'),hand=$('crHand');bar.classList.add('on');charge={p:0};
+  (function tick(t){if(!charge)return;const ph=((t-t0)/1500)%2;charge.p=ph<1?ph:2-ph;                // the bar climbs and falls until you let go
+    bar.firstElementChild.style.height=(charge.p*100)+'%';hand.style.transform=`translateY(${(-96+charge.p*52).toFixed(0)}px) rotate(${(-charge.p*12).toFixed(1)}deg)`;requestAnimationFrame(tick)})(t0);
+}
+function chargeEnd(){if(!charge)return;const p=charge.p;charge=null;$('pbar').classList.remove('on');crapsRoll(Math.max(.12,p))}
+async function crapsRoll(power){
   if(mg.busy)return;
   if(mg.point==null){if(S.bank<mg.bet)return;S.bank=r2(S.bank-mg.bet);saveBank();mg.live=mg.bet;clack()}
   mg.busy=true;miniUI('');
-  const d0=$('die0'),d1=$('die1');d0.classList.add('roll');d1.classList.add('roll');
-  const iv=setInterval(()=>{d0.style.background=DIE[Math.floor(Math.random()*6)];d1.style.background=DIE[Math.floor(Math.random()*6)];flick(.25)},110);
-  await sleep(900);clearInterval(iv);
   let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6);
   if(mg.point==null&&lucky()&&crapsStep(null,a+b)==='lose'&&Math.random()<.15){a=1+Math.floor(Math.random()*6);b=1+Math.floor(Math.random()*6)}   // cake luck
-  d0.classList.remove('roll');d1.classList.remove('roll');d0.style.background=DIE[a-1];d1.style.background=DIE[b-1];thock();
-  const r=crapsStep(mg.point,a+b),was=mg.point;let msg;
-  if(r==='win'){S.bank=r2(S.bank+mg.live*2);saveBank();mg.point=null;chime(.8);msg=`<b>${a+b}!</b> You win ${fmtC(mg.live)}.`}
-  else if(r==='lose'){mg.point=null;msg=`<b>${a+b}.</b> ${was==null?'Craps':'Seven out'}. You lose ${fmtC(mg.live)}.`}
-  else{mg.point=r;msg=was==null?`<b>${a+b}.</b> The point is ${r}. Roll it again before a 7.`:`<b>${a+b}.</b> Still rolling for ${r}.`}
-  const pk=$('puck');pk.textContent=mg.point==null?'POINT OFF':'POINT '+mg.point;pk.classList.toggle('on',mg.point!=null);
+  await diceThrow(power,[a,b]);
+  const r=crapsStep(mg.point,a+b),was=mg.point,stake=mg.live;let msg;
+  if(r==='win'){S.bank=r2(S.bank+stake*2);saveBank();mg.point=null;mg.live=0;chime(.8);msg=`<b>${a+b}!</b> You win ${fmtC(stake)}.`}
+  else if(r==='lose'){mg.point=null;mg.live=0;msg=`<b>${a+b}.</b> ${was==null?'That loses on the first roll.':'Seven before your point.'} You lose ${fmtC(stake)}.`}
+  else{mg.point=r;msg=was==null?`<b>${a+b}.</b> Your point is ${r}. Roll another ${r} to win. A 7 loses.`:`<b>${a+b}.</b> Keep rolling for ${r}.`}
   mg.busy=false;miniUI(msg);
 }
+function diceThrow(power,res){                   // real cubes: they tumble through the air, roll along the ground, and the last roll brings the thrown number up
+  return new Promise(done=>{
+    const pit=$('pit'),W=pit.clientWidth,H=pit.clientHeight,top=H*.24+30,hand=$('crHand'),still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(hand.animate)hand.animate([{transform:hand.style.transform||'translateY(-80px)'},{transform:'translateY(-190px) rotate(9deg)',offset:.35},{transform:'translateY(0) rotate(0)'}],{duration:560,easing:'ease-out'});
+    hand.style.transform='';
+    dice.forEach((d,k)=>{d.n=res[k]});
+    if(still){diceRest();return done()}
+    const sp=520+power*1250,SLOW=250,STOP=34;
+    const ahead=(cur,base,dir)=>dir>0?base+360*Math.ceil((cur+100-base)/360):base+360*Math.floor((cur-100-base)/360);   // the next time this face comes round
+    dice.forEach((d,k)=>{d.x=W/2+(k?16:-16);d.y=H-110;d.h=18;d.vh=140+power*160;d.a=Math.random()*360;const ang=(-90+(k?9:-9)+(Math.random()-.5)*26)*Math.PI/180;
+      d.vx=Math.cos(ang)*sp*(.9+Math.random()*.2);d.vy=Math.sin(ang)*sp*(.9+Math.random()*.2);d.w=(Math.random()<.5?-1:1)*(120+power*260);d.rest=false;d.set=null;
+      d.sx=(Math.random()<.5?-1:1)*(.75+Math.random()*.4);d.sy=(Math.random()<.5?-1:1)*(.45+Math.random()*.5)});
+    let last=performance.now(),t0=last,lastHit=0;
+    const hit=(d,str)=>{d.vh=Math.min(260,90+str*.22);d.w=-d.w*.7+(Math.random()-.5)*160;if(!d.set&&Math.random()<.5)d.sy=-d.sy;const n=performance.now();if(n-lastHit>70){lastHit=n;thock()}};
+    const land=d=>{d.rest=true;d.vx=d.vy=0;d.h=0;if(d.set){d.rx=d.set.tx;d.ry=d.set.ty}else[d.rx,d.ry]=FACE[d.n-1]};
+    (function step(t){
+      const dt=Math.min(.03,(t-last)/1000);last=t;let moving=false;
+      dice.forEach((d,k)=>{
+        if(d.rest)return;
+        d.x+=d.vx*dt;d.y+=d.vy*dt;d.a+=d.w*dt;d.h+=d.vh*dt;d.vh-=900*dt;
+        if(d.h<0){d.h=0;if(d.vh<-120){d.vh=-d.vh*.42;d.vx*=.86;d.vy*=.86}else d.vh=0}
+        const f=Math.exp(-(d.h>0?.5:1.9)*dt);d.vx*=f;d.vy*=f;d.w*=Math.exp(-1.6*dt);
+        if(d.y<top){d.y=top;const s0=Math.abs(d.vy);d.vy=s0*.62;hit(d,s0)}                              // the wall
+        if(d.y>H-74){d.y=H-74;const s0=Math.abs(d.vy);d.vy=-s0*.55;hit(d,s0)}
+        if(d.x<30){d.x=30;const s0=Math.abs(d.vx);d.vx=s0*.6;hit(d,s0)}
+        if(d.x>W-30){d.x=W-30;const s0=Math.abs(d.vx);d.vx=-s0*.6;hit(d,s0)}
+        const v=Math.hypot(d.vx,d.vy),grounded=d.h===0&&d.vh===0;
+        if(!d.set){const turn=Math.min(v,900)*.95*dt;d.rx+=d.sx*turn;d.ry+=d.sy*turn;                   // tumbling as fast as it travels
+          if(v<SLOW&&grounded)d.set={v0:v,rx0:d.rx,ry0:d.ry,tx:ahead(d.rx,FACE[d.n-1][0],d.sx),ty:ahead(d.ry,FACE[d.n-1][1],d.sy),p:0}}
+        if(d.set){const q=d.set;q.p=Math.max(q.p,Math.min(1,(q.v0-v)/(q.v0-STOP)));const e=1-(1-q.p)*(1-q.p);d.rx=q.rx0+(q.tx-q.rx0)*e;d.ry=q.ry0+(q.ty-q.ry0)*e}   // the last roll, slowing onto its face
+        if(v<STOP&&grounded)land(d);else moving=true;
+        dieDraw(k);
+      });
+      const o=dice[0],q=dice[1],dx=q.x-o.x,dy=q.y-o.y,dd=Math.hypot(dx,dy);                                // the dice knock each other apart
+      if(dd<58&&dd>0){const nx=dx/dd,ny=dy/dd,push=(58-dd)/2;o.x-=nx*push;o.y-=ny*push;q.x+=nx*push;q.y+=ny*push;
+        const rel=(q.vx-o.vx)*nx+(q.vy-o.vy)*ny;if(rel<-40){o.vx+=rel*nx*.9;o.vy+=rel*ny*.9;q.vx-=rel*nx*.9;q.vy-=rel*ny*.9;
+          [o,q].forEach(d=>{if(d.rest){d.rest=false;d.set={v0:SLOW,rx0:d.rx,ry0:d.ry,tx:d.rx,ty:d.ry,p:0}}});moving=true}}
+      if(moving&&t-t0<7000)return requestAnimationFrame(step);
+      dice.forEach((d,k)=>{land(d);dieDraw(k)});done();
+    })(last);
+  });
+}
+/* five card draw against the dealer */
 function pkDeck(){const dk=[];for(const su of 'hdsc')for(const r of RANKS)dk.push({r,s:su,id:++uid});for(let i=dk.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[dk[i],dk[j]]=[dk[j],dk[i]]}return dk}
-const HANDS=['High card','Pair','Flush','Straight','Three of a kind','Straight flush'];
+function pkShow(){$('pkP').innerHTML=mg.p.map((c,i)=>`<div class="hc${mg.hold[i]?' held':''}" data-h="${i}">${cardHTML(c)}<span>HELD</span></div>`).join('')}
 async function pokerDeal(){
   if(mg.busy||S.bank<mg.bet)return;
   mg.busy=true;S.bank=r2(S.bank-mg.bet);saveBank();clack();
-  const dk=pkDeck();mg.p=dk.slice(0,3);mg.d=dk.slice(3,6);
-  $('pkD').innerHTML=backHTML()+backHTML()+backHTML();$('pkP').innerHTML='';miniUI('');
-  for(const c of mg.p){$('pkP').insertAdjacentHTML('beforeend',cardHTML(c));flick();await sleep(260)}
-  mg.stage='decide';mg.busy=false;
-  miniUI(`You have <b>${HANDS[rank3(mg.p)[0]].toLowerCase()}</b>. Play for another ${fmtC(mg.bet)}, or fold.`);
+  mg.deck=pkDeck();mg.p=mg.deck.splice(0,5);mg.d=mg.deck.splice(0,5);mg.hold=[false,false,false,false,false];mg.stage='hold';
+  $('pkD').innerHTML=backHTML().repeat(5);$('pkP').innerHTML='';miniUI('');
+  for(let i=0;i<5;i++){$('pkP').insertAdjacentHTML('beforeend',`<div class="hc" data-h="${i}">${cardHTML(mg.p[i])}<span>HELD</span></div>`);flick();await sleep(170)}
+  mg.busy=false;
+  miniUI(`You have <b>${HANDC[rank5c(mg.p)[0]]}</b>. Tap the cards to keep, then draw.`);
 }
-async function pokerEnd(play){
-  if(mg.busy)return;
-  mg.busy=true;
-  if(play){if(S.bank<mg.bet){mg.busy=false;return}S.bank=r2(S.bank-mg.bet);saveBank();clack()}
-  miniUI('');
-  $('pkD').innerHTML='';for(const c of mg.d){$('pkD').insertAdjacentHTML('beforeend',cardHTML(c));flick();await sleep(300)}
-  let msg;
-  if(!play)msg=`You folded. The dealer had ${HANDS[rank3(mg.d)[0]].toLowerCase()}.`;
-  else{const r=poker3(mg.p,mg.d,mg.bet),net=r2(r.back-2*mg.bet);S.bank=r2(S.bank+r.back);saveBank();if(net>0)chime(.8);
-    msg=`${r.note} ${net>0?`You win <b>${fmtC(net)}</b>.`:net<0?`You lose ${fmtC(-net)}.`:'You break even.'}`}
+async function pokerDraw(){
+  if(mg.busy||mg.stage!=='hold')return;
+  mg.busy=true;miniUI('');
+  for(let i=0;i<5;i++)if(!mg.hold[i]){mg.p[i]=mg.deck.shift();flipIds.add(mg.p[i].id);pkShow();flick();await sleep(230)}
+  const keep=dealerHold(mg.d),n=keep.filter(k=>!k).length;
+  miniUI(n?`The dealer draws ${n} card${n>1?'s':''}.`:'The dealer stands pat.');await sleep(750);
+  for(let i=0;i<5;i++)if(!keep[i])mg.d[i]=mg.deck.shift();
+  $('pkD').innerHTML='';for(const c of mg.d){$('pkD').insertAdjacentHTML('beforeend',cardHTML(c));flick();await sleep(210)}
+  const rp=rank5c(mg.p),rd=rank5c(mg.d),c=cmp3(rp,rd);let msg;
+  if(c>0){S.bank=r2(S.bank+mg.bet*2);saveBank();chime(.8);msg=`You win with <b>${HANDC[rp[0]]}</b> against ${HANDC[rd[0]]}. You win ${fmtC(mg.bet)}.`}
+  else if(c===0){S.bank=r2(S.bank+mg.bet);saveBank();msg=`A dead tie with ${HANDC[rp[0]]}. Your bet comes back.`}
+  else msg=`The dealer wins with <b>${HANDC[rd[0]]}</b> against your ${HANDC[rp[0]]}. You lose ${fmtC(mg.bet)}.`;
   mg.stage='done';mg.busy=false;miniUI(msg);
 }
-$('mB').onclick=()=>mg.kind==='craps'?crapsRoll():mg.stage==='decide'?pokerEnd(true):pokerDeal();
-$('mA').onclick=()=>{if(mg.busy)return;if(mg.kind==='poker'&&mg.stage==='decide')return pokerEnd(false);if(mg.kind==='craps'&&mg.point!=null)return;$('mini').classList.remove('open');render()};
+$('mStage').addEventListener('click',e=>{const h=e.target.closest('.hc');if(!h||mg.kind!=='poker'||mg.stage!=='hold'||mg.busy)return;const i=+h.dataset.h;mg.hold[i]=!mg.hold[i];h.classList.toggle('held',mg.hold[i]);tick()});
+$('mB').addEventListener('pointerdown',chargeStart);
+['pointerup','pointercancel'].forEach(t=>$('mB').addEventListener(t,chargeEnd));
+$('mB').onclick=e=>{if(mg.kind==='craps'){if(e.detail===0&&!mg.busy&&!charge)crapsRoll(.55);return}mg.stage==='hold'?pokerDraw():pokerDeal()};   // craps throws on release; a keyboard press throws at medium power
+$('mA').onclick=()=>{if(mg.busy)return;if(mg.kind==='poker'&&mg.stage==='hold')return;if(mg.kind==='craps'&&mg.point!=null)return;$('mini').classList.remove('open');render()};
 $('mBets').onclick=e=>{const b=e.target.closest('[data-mb]');if(!b||b.disabled)return;mg.bet=+b.dataset.mb;clack();miniUI()};
 
 (function boot(){
