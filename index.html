@@ -40,13 +40,13 @@ button:focus-visible,label:focus-within{outline:2px solid var(--gold);outline-of
 #scene{position:fixed;inset:0;perspective:700px;overflow:hidden}
 #world{position:absolute;inset:0;transform-style:preserve-3d}
 #room{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transform:translateZ(700px)}
-.wall{position:absolute;width:1120px;height:400px;left:-560px;top:-200px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.wall{position:absolute;width:1680px;height:400px;left:-840px;top:-200px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .wall svg{display:block}
-.w-front{transform:translateZ(-1960px) scale(3.5)}
-.w-left{transform:rotateY(90deg) translateZ(-1960px) scale(3.5)}
-.w-right{transform:rotateY(-90deg) translateZ(-1960px) scale(3.5)}
-.w-back{transform:rotateY(180deg) translateZ(-1960px) scale(3.5)}
-.flat{position:absolute;width:560px;height:560px;left:-280px;top:-280px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.w-front{transform:translateZ(-2940px) scale(3.5)}
+.w-left{transform:rotateY(90deg) translateZ(-2940px) scale(3.5)}
+.w-right{transform:rotateY(-90deg) translateZ(-2940px) scale(3.5)}
+.w-back{transform:rotateY(180deg) translateZ(-2940px) scale(3.5)}
+.flat{position:absolute;width:840px;height:840px;left:-420px;top:-420px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .w-floor{transform:rotateX(90deg) translateZ(-700px) scale(7);
   background:radial-gradient(circle at 50% 50%,transparent 30%,rgba(0,0,0,.55) 75%),
    radial-gradient(circle,rgba(230,188,104,.5) 0 1.5px,transparent 2.5px) 0 0/28px 28px,
@@ -166,6 +166,38 @@ body.seated #look,body.seated #joy,body.seated #lookhint{display:none}
 .street .pbar::after{content:"POWER";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);font:800 9px var(--body);letter-spacing:2px;color:#fff;mix-blend-mode:difference}
 #crHand{position:absolute;z-index:3;left:50%;bottom:-236px;width:84px;margin-left:-42px;pointer-events:none;transform-origin:50% 100%}
 #crHand svg{display:block;width:100%;height:auto}
+/* frog race: lit lanes of lily pads over swamp water */
+.swamp{position:relative;width:100%;flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:9px 28px 8px;border-radius:16px;overflow:hidden;border:4px solid #3b2a17;
+  box-shadow:inset 0 0 0 2px #5c8f35,inset 0 0 26px rgba(0,0,0,.55);
+  background:radial-gradient(circle at 12% 18%,rgba(140,190,90,.22),transparent 30%),radial-gradient(circle at 88% 70%,rgba(140,190,90,.18),transparent 32%),repeating-linear-gradient(115deg,rgba(0,0,0,.12) 0 3px,transparent 3px 11px),linear-gradient(#33451f,#1f2e14)}
+.swamp::before,.swamp::after{content:"";position:absolute;top:0;bottom:0;width:26px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 150'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M8 150Q6 90 9 40' stroke='%234f7a2c' stroke-width='2'/%3E%3Cpath d='M17 150Q20 100 16 62' stroke='%233f6b2a' stroke-width='2'/%3E%3Cpath d='M12 150Q2 120 2 96' stroke='%235c8f35' stroke-width='2.4'/%3E%3Cpath d='M14 150Q24 126 24 108' stroke='%235c8f35' stroke-width='2.4'/%3E%3C/g%3E%3Crect x='6.5' y='22' width='5' height='20' rx='2.5' fill='%235a3416'/%3E%3Crect x='13.5' y='46' width='5' height='18' rx='2.5' fill='%236b4120'/%3E%3C/svg%3E") 0 100%/26px 150px repeat-y}
+.swamp::before{left:1px}.swamp::after{right:1px;transform:scaleX(-1)}
+.swamp s{position:absolute;z-index:3;width:5px;height:5px;border-radius:50%;background:#f4ffb0;box-shadow:0 0 8px 3px rgba(230,255,140,.75);pointer-events:none;animation:fly 5s ease-in-out infinite alternate,glim 1.7s ease-in-out infinite}
+@keyframes fly{to{transform:translate(26px,-34px)}}
+@keyframes glim{50%{opacity:.15}}
+.lane{position:relative;border-radius:10px;border:1.5px solid var(--fc);overflow:hidden;cursor:pointer;box-shadow:inset 0 0 16px -2px var(--fc),0 0 10px -2px var(--fc);
+  background:radial-gradient(ellipse at 30% 22%,rgba(255,255,255,.16),transparent 38%),radial-gradient(ellipse at 72% 64%,rgba(255,255,255,.1),transparent 36%),linear-gradient(#2a8fb0,#176a8c 55%,#0f4f6e)}
+.lane::before{content:"";position:absolute;inset:-40px 0;pointer-events:none;animation:ripple 3.2s linear infinite;
+  background:repeating-linear-gradient(176deg,rgba(255,255,255,.16) 0 1.5px,transparent 1.5px 13px),repeating-linear-gradient(184deg,rgba(0,40,60,.22) 0 2px,transparent 2px 21px)}
+@keyframes ripple{to{transform:translateY(26px)}}
+.lane.mine{box-shadow:inset 0 0 26px 0 var(--fc),0 0 16px 1px var(--fc);border-width:2.5px}
+.lane .fin{position:absolute;left:0;right:0;top:0;height:5.5%;background:repeating-conic-gradient(#fff 0 25%,#12040a 0 50%) 0 0/14px 14px;box-shadow:0 3px 6px rgba(0,0,0,.4)}
+.lane u{position:absolute;left:50%;width:50%;max-width:46px;aspect-ratio:1;transform:translate(-50%,50%);border-radius:50%;
+  background:radial-gradient(circle at 40% 36%,rgba(255,255,255,.22),transparent 45%),conic-gradient(from 20deg,#58b860 0 318deg,transparent 318deg);
+  box-shadow:inset 0 0 0 2px #2c7a3c,0 3px 0 rgba(0,30,45,.35),0 0 0 3px rgba(255,255,255,.1)}
+.lane u.fl::after{content:"";position:absolute;right:6%;top:8%;width:36%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffe08a 0 26%,#ff9fc0 28% 62%,#fff 64%);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+@media (prefers-reduced-motion:reduce){.lane::before,.swamp s{animation:none}}
+.frog{position:absolute;left:50%;width:62%;max-width:64px;aspect-ratio:1;transform:translate(-50%,50%);will-change:bottom,transform;filter:drop-shadow(0 4px 4px rgba(0,0,0,.45))}
+.frog svg{display:block;width:100%;height:100%;overflow:visible}
+.frog .legs{transform-box:fill-box;transform-origin:50% 0;transition:transform .09s}
+.frog.hop .legs{transform:scaleY(1.7)}
+.frog .crown{position:absolute;left:50%;top:-46%;width:60%;margin-left:-30%;opacity:0;transform:translateY(8px) scale(.6);transition:opacity .2s,transform .2s}
+.frog.lead .crown{opacity:1;transform:none}
+.fnames{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:0 32px;flex:none}
+.fnames button{padding:5px 2px 4px;border-radius:10px;border:1.5px solid var(--fc);background:#0b0306;color:#fff;font:800 13px var(--body);line-height:1.15}
+.fnames small{display:block;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--fc);visibility:hidden}
+.fnames button.on{background:var(--fc);color:#12040a;box-shadow:0 0 14px var(--fc)}
+.fnames button.on small{visibility:visible;color:#12040a}
 /* five card draw: an oval table with a padded rail */
 .pkfelt{position:relative;width:100%;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:4px;padding:16px 10px 30px;border-radius:46% / 13%;
   background:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),radial-gradient(circle at 50% 45%,#27855c,#17573c);
@@ -1233,34 +1265,35 @@ function neon(x,y,t,size,col){
   return `<text x="${x}" y="${y}" text-anchor="middle" font-family="Limelight,serif" font-size="${size}" fill="none" stroke="${col}" stroke-width="9" opacity=".22" stroke-linejoin="round">${t}</text>
   <text x="${x}" y="${y}" text-anchor="middle" font-family="Limelight,serif" font-size="${size}" fill="#fff4e6" stroke="${col}" stroke-width="1.6">${t}</text>`;
 }
+function noSeat(w,i){return i<1||i>10||((w==='front'||w==='back')&&i>2&&i<9)||(w==='left'&&(i===5||i===6))}     // no machine in the corners, along the middle of the front wall, behind the cabinets, or where the elevator is
 function wallSVG(kind){
-  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 400" width="1120" height="400"><defs>
+  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 400" width="1680" height="400"><defs>
   <linearGradient id="cab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a1222"/><stop offset="1" stop-color="#1c0609"/></linearGradient>
   <linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c0810"/><stop offset=".55" stop-color="#4a0d1a"/><stop offset="1" stop-color="#22060c"/></linearGradient>
   <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d0b2e"/><stop offset=".6" stop-color="#8a2748"/><stop offset="1" stop-color="#f2a65a"/></linearGradient>
   <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a7350"/><stop offset=".5" stop-color="#e3cf9f"/><stop offset="1" stop-color="#7d6846"/></linearGradient>
   <radialGradient id="glow"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".75"/><stop offset="1" stop-color="#ffe2a0" stop-opacity="0"/></radialGradient></defs>
-  <rect width="1120" height="400" fill="url(#wl)"/>`;
-  for(let x=0;x<1120;x+=140)s+=`<rect x="${x+6}" y="34" width="128" height="330" rx="3" fill="rgba(0,0,0,.14)" stroke="rgba(230,188,104,.2)"/>
+  <rect width="1680" height="400" fill="url(#wl)"/>`;
+  for(let x=0;x<1680;x+=140)s+=`<rect x="${x+6}" y="34" width="128" height="330" rx="3" fill="rgba(0,0,0,.14)" stroke="rgba(230,188,104,.2)"/>
    <circle cx="${x+70}" cy="150" r="34" fill="url(#glow)"/><rect x="${x+66}" y="142" width="8" height="16" rx="3" fill="#ffe9b8"/>`;
-  s+=`<rect width="1120" height="22" fill="#12040a"/><rect y="22" width="1120" height="3" fill="#e6bc68" opacity=".7"/><rect y="370" width="1120" height="30" fill="#12040a"/>`;
+  s+=`<rect width="1680" height="22" fill="#12040a"/><rect y="22" width="1680" height="3" fill="#e6bc68" opacity=".7"/><rect y="370" width="1680" height="30" fill="#12040a"/>`;
   if(kind==='front'){
     const SU=[['\u2660\uFE0E','#12040a'],['\u2665\uFE0E','#cf1f3d'],['\u2663\uFE0E','#12040a'],['\u2666\uFE0E','#cf1f3d']];let n=0;
-    const row=(txt,y)=>[...txt].map((ch,k)=>{if(ch===' ')return'';const [su,col]=SU[n++%4],x=522+(k-(txt.length-1)/2)*41;
+    const row=(txt,y)=>[...txt].map((ch,k)=>{if(ch===' ')return'';const [su,col]=SU[n++%4],x=840+(k-(txt.length-1)/2)*41;
       return `<g transform="translate(${x},${y}) rotate(${n%2?-3:3})"><rect x="-17" y="-25" width="34" height="50" rx="4" fill="#fdfaf3" stroke="#e6bc68" stroke-width="1.2"/><text y="8" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="25" fill="${col}">${ch}</text><text x="-11" y="-13" text-anchor="middle" font-size="9" fill="${col}">${su}</text><text x="11" y="21" text-anchor="middle" font-size="9" fill="${col}">${su}</text></g>`}).join('');
     s+=row('CHEERS TO 22',66)+row('EMILY!',124);
   }else{
     const t={left:['RED','jack','#ff4d6d'],right:['K '+HEART+' E','09 \u00b7 20 \u00b7 26','#ffa3cf'],back:['HAPPY','22nd','#e6bc68']}[kind];
-    s+=`<rect x="410" y="40" width="300" height="100" rx="12" fill="#12040a" stroke="${t[2]}" stroke-width="2" opacity=".95"/>
-        ${neon(560,84,t[0],40,t[2])}${neon(560,126,t[1],kind==='right'?24:34,'#e6bc68')}`;
+    s+=`<rect x="690" y="40" width="300" height="100" rx="12" fill="#12040a" stroke="${t[2]}" stroke-width="2" opacity=".95"/>
+        ${neon(840,84,t[0],40,t[2])}${neon(840,126,t[1],kind==='right'?24:34,'#e6bc68')}`;
   }
-  for(let i=1;i<7;i++)if(!((kind==='back'||kind==='left')&&i>1&&i<6&&!(kind==='left'&&(i===2||i===5))))s+=slotSVG(522+(i-3.5)*140,i+(kind==='left'?1:kind==='right'?2:kind==='back'?3:0),kind,i);
-  if(kind==='left')s+=`<g class="elev" transform="translate(160,0)"><rect x="318" y="150" width="164" height="222" rx="6" fill="#12040a" stroke="#e6bc68" stroke-width="3"/>
+  for(let i=1;i<11;i++)if(!noSeat(kind,i))s+=slotSVG(802+(i-5.5)*140,i+(kind==='left'?1:kind==='right'?2:kind==='back'?3:0),kind,i);
+  if(kind==='left')s+=`<g class="elev" transform="translate(440,0)"><rect x="318" y="150" width="164" height="222" rx="6" fill="#12040a" stroke="#e6bc68" stroke-width="3"/>
     <rect x="330" y="186" width="69" height="184" fill="url(#steel)" stroke="#8a6420"/><rect x="401" y="186" width="69" height="184" fill="url(#steel)" stroke="#8a6420"/>
     <rect x="366" y="158" width="68" height="22" rx="4" fill="#0b0204" stroke="#e6bc68"/><text x="400" y="175" text-anchor="middle" font-family="Limelight,serif" font-size="15" fill="#ff4d6d">22</text>
     <path d="M345 164l6 10h-12z" fill="#e6bc68"/><path d="M455 174l6-10h-12z" fill="#e6bc68" opacity=".4"/>
     <rect x="490" y="250" width="14" height="30" rx="4" fill="#12040a" stroke="#e6bc68"/><circle cx="497" cy="259" r="3.5" fill="#ffe08a"/><circle cx="497" cy="271" r="3.5" fill="#5a3a22"/></g>`;
-  if(kind==='back')for(let n=0;n<3;n++)s+=cabSVG(440+n*120,n);
+  if(kind==='back')for(let n=0;n<3;n++)s+=cabSVG(720+n*120,n);
   return s+'</svg>';
 }
 $('room').innerHTML=['front','left','right','back'].map(k=>`<div class="wall w-${k}">${wallSVG(k)}</div>`).join('')+'<div class="flat w-floor"></div><div class="flat w-ceil"></div>';
@@ -1268,7 +1301,7 @@ $('deck').innerHTML=backHTML();
 
 /* chairs, the man at his machine, and her seat */
 const ANG={front:0,left:90,right:-90,back:180},LRU=[-420,0,420];
-const RM=1960,slotU=i=>(i-3.5)*490;                       // RM: centre to wall. slotU: a machine's position along its wall, in room units
+const RM=2940,slotU=i=>(i-5.5)*490;                       // RM: centre to wall. slotU: a machine's position along its wall, in room units
 function place(el,w,u,d,top,sc){el.style.transform=`rotateY(${ANG[w]}deg) translate3d(${u}px,${top}px,${-(RM-d)}px) scale(${sc})`}
 function toRoom(w,u,d){const a=ANG[w]*Math.PI/180,z=-(RM-d);return [u*Math.cos(a)+z*Math.sin(a),-u*Math.sin(a)+z*Math.cos(a)]}
 const CHAIR=`<svg viewBox="0 0 85 165"><rect x="18" y="50" width="5" height="26" fill="#b98f3c"/><rect x="62" y="50" width="5" height="26" fill="#b98f3c"/>
@@ -1323,7 +1356,6 @@ const STOOL=part(0,-176,6,150,28,150,{all:VELVET,top:'radial-gradient(circle,#b3
 function placeFig(el,w,u,d,turn){el.style.transform=`rotateY(${ANG[w]}deg) translate3d(${u}px,700px,${-(RM-d)}px) rotateY(${turn}deg)`}
 $('fig').innerHTML=`<div class="fig3" style="left:50%;transform:translateY(386px) scale3d(.62,.62,.62)">${person('dealer')}</div>`;
 // no chair behind the dealer, and none at the side-wall corners where two rows of chairs would collide
-function noSeat(w,i){return i<1||i>6||((w==='front'||w==='back')&&i>1&&i<6)||(w==='left'&&(i===3||i===4))}     // no machine in the corners, behind the dealer, behind the cabinets, or where the elevator is
 const MANUP=`<svg viewBox="0 0 100 250"><rect x="33" y="140" width="15" height="98" rx="6" fill="#b4b4b6"/><rect x="52" y="140" width="15" height="98" rx="6" fill="#b4b4b6"/>
  <ellipse cx="39" cy="242" rx="13" ry="6" fill="#2b2b30"/><ellipse cx="61" cy="242" rx="13" ry="6" fill="#2b2b30"/>
  <path d="M24 58Q12 78 14 100L26 100Q26 82 33 70Z" fill="#1f3f73"/><path d="M76 58Q88 78 86 100L74 100Q74 82 67 70Z" fill="#1f3f73"/>
@@ -1337,10 +1369,10 @@ const MANUP=`<svg viewBox="0 0 100 250"><rect x="33" y="140" width="15" height="
 function mkReels(){const el=document.createElement('div');el.className='mreels';el.innerHTML='<div class="reel"></div><div class="reel"></div><div class="reel"></div>';$('room').appendChild(el);return el}
 (function(){
   const room=$('room');let h='';
-  for(const w in ANG)for(let i=0;i<8;i++)if(!noSeat(w,i))h+=`<div class="fig3 stool" data-c="${w}${i}">${STOOL}</div>`;
+  for(const w in ANG)for(let i=0;i<12;i++)if(!noSeat(w,i))h+=`<div class="fig3 stool" data-c="${w}${i}">${STOOL}</div>`;
   for(let n=0;n<3;n++)h+=`<div class="fig3 stool" data-l="${n}">${STOOL}</div>`;
   room.insertAdjacentHTML('beforeend',h+'<div class="fig3" id="himSit"></div><div class="fig3" id="himWalk"></div><div class="fig3" id="meSit"></div>');
-  room.querySelectorAll('.stool').forEach(c=>{if(c.dataset.l)return placeFig(c,'back',LRU[+c.dataset.l],226,180);const w=c.dataset.c.slice(0,-1),i=+c.dataset.c.slice(-1);placeFig(c,w,slotU(i),226,180)});
+  room.querySelectorAll('.stool').forEach(c=>{if(c.dataset.l)return placeFig(c,'back',LRU[+c.dataset.l],226,180);const w=c.dataset.c.replace(/\d+$/,''),i=+c.dataset.c.match(/\d+$/)[0];placeFig(c,w,slotU(i),226,180)});
 })();
 const himReels=mkReels(),myReels=mkReels(),himCells=[...himReels.children],myCells=[...myReels.children];
 
@@ -1372,7 +1404,7 @@ const SUITP={h:"<path d='M50 84C10 54 14 22 34 22C44 22 50 32 50 36C50 32 56 22 
   s:"<path d='M50 14C90 46 86 74 66 74C58 74 52 68 50 64C48 68 42 74 34 74C14 74 10 46 50 14ZM44 66h12l6 22h-24z' fill='#12040a'/>",c:"<g fill='#12040a'><circle cx='50' cy='32' r='17'/><circle cx='32' cy='56' r='17'/><circle cx='68' cy='56' r='17'/><path d='M44 60h12l6 28h-24z'/></g>"};
 const tile=(k,bg,r)=>sv(`<rect width='100' height='100' rx='${r||0}' fill='${bg}'/>${SUITP[k]}`);
 const on=(x,z,w,h,d,f,lift)=>part(x,-430-(lift||0)-h/2,z,w,h,d,f);                 // something standing on a 430-high table
-const snackCloth=(c,top)=>part(0,-215,0,300,430,200,{all:c,top,skip:'B'});
+const snackCloth=(c,top)=>part(0,-215,0,330,430,330,{all:c,top,skip:'B'});
 const GOLDT='linear-gradient(#ffe08a,#e6bc68)',SILVER='linear-gradient(90deg,#8a8f98,#e9edf2,#8a8f98)';
 const flute=(x,z)=>on(x,z,3,22,3,{all:'#f4f1ea',skip:'TB'})+on(x,z,13,30,13,{all:'linear-gradient(rgba(255,255,255,.35) 22%,rgba(255,214,120,.85) 22%)',top:'#fff3c9',skip:'B'},22);
 const cocktail=(x,z,k)=>on(x,z,24,30,24,{all:'linear-gradient(rgba(255,255,255,.4) 20%,#cf1f3d 20%)',top:tile(k,'#cf1f3d'),skip:'B'});
@@ -1395,32 +1427,80 @@ const SWEETS=snackCloth('linear-gradient(#1f6b4a,#14503a)','radial-gradient(circ
   on(-78,-8,130,4,110,{all:BRASS,top:GOLDT,skip:'B'})+chips(-118,-36,26,'#3a1a12')+chips(-84,-36,36,'#5a3416')+chips(-50,-36,18,'#f3e2c0')+chips(-118,6,14,'#f3e2c0')+chips(-84,6,22,'#3a1a12')+
   cookie(30,-40,'s')+cookie(68,-40,'h')+cookie(106,-40,'c')+cookie(30,12,'d')+cookie(68,12,'s')+cookie(106,12,'h')+on(68,-14,130,4,110,{all:'#fff',top:'#fdfaf3',skip:'B'})+
   on(-44,58,30,30,30,{all:die(5),top:die(6),skip:'B'})+on(-6,64,30,30,30,{all:die(2),top:die(3),skip:'B'})+soda(70,66)+soda(108,66);
+/* the frog race table: four lit lanes of lily pads over swamp water */
+const FROGS=[['Faruk','#e0364a'],['Erlaf','#3d7df0'],['Yarl','#3fbf5a'],['Jabin','#9b59d6']];
+const svBox=(w,h,b)=>sv(b).replace(encodeURIComponent("viewBox='0 0 100 100'").replace(/'/g,'%27'),encodeURIComponent(`viewBox='0 0 ${w} ${h}'`).replace(/'/g,'%27'));   // a texture drawn at the table's own proportions
+const frogArt=(c,x,y,w)=>`<svg x='${x-w/2}' y='${y-w/2}' width='${w}' height='${w}' viewBox='0 0 60 60'><ellipse cx='32' cy='38' rx='19' ry='20' fill='#00202c' opacity='.35'/><g fill='${c}'><path d='M14 34Q0 40 4 56Q10 58 12 50Q12 44 20 42Z'/><path d='M46 34Q60 40 56 56Q50 58 48 50Q48 44 40 42Z'/><path d='M12 22Q4 16 6 8Q12 8 16 16ZM48 22Q56 16 54 8Q48 8 44 16Z'/><ellipse cx='30' cy='32' rx='17' ry='20'/><circle cx='21' cy='15' r='7.5'/><circle cx='39' cy='15' r='7.5'/></g><ellipse cx='30' cy='36' rx='10' ry='12' fill='#fff' opacity='.22'/><circle cx='21' cy='14' r='5' fill='#fff'/><circle cx='39' cy='14' r='5' fill='#fff'/><circle cx='21' cy='12.5' r='2.4' fill='#12040a'/><circle cx='39' cy='12.5' r='2.4' fill='#12040a'/></svg>`;
+const SWAMPF=(()=>{                              // the same picture as the game itself: blue lanes, ripples, pads, lilies, reeds and fireflies
+  const W=480,H=640,LX=k=>52+k*96,LW=88;
+  let b=`<defs><linearGradient id='wt' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2f97b8'/><stop offset='.55' stop-color='#176a8c'/><stop offset='1' stop-color='#0f4f6e'/></linearGradient>
+    <linearGradient id='bk' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#364a20'/><stop offset='1' stop-color='#1f2e14'/></linearGradient>
+    <pattern id='ht' width='14' height='14' patternUnits='userSpaceOnUse' patternTransform='rotate(25)'><rect width='3' height='14' fill='#000' opacity='.13'/></pattern>
+    <pattern id='ck' width='22' height='22' patternUnits='userSpaceOnUse'><rect width='22' height='22' fill='#fff'/><rect width='11' height='11' fill='#12040a'/><rect x='11' y='11' width='11' height='11' fill='#12040a'/></pattern>
+    <radialGradient id='ff'><stop offset='0' stop-color='#f4ffb0'/><stop offset='.35' stop-color='#e6ff8c' stop-opacity='.7'/><stop offset='1' stop-color='#e6ff8c' stop-opacity='0'/></radialGradient></defs>
+    <rect width='${W}' height='${H}' fill='url(#bk)'/><rect width='${W}' height='${H}' fill='url(#ht)'/><circle cx='50' cy='110' r='120' fill='#8cbe5a' opacity='.16'/><circle cx='430' cy='450' r='130' fill='#8cbe5a' opacity='.14'/>
+    <rect x='4' y='4' width='${W-8}' height='${H-8}' rx='14' fill='none' stroke='#3b2a17' stroke-width='8'/><rect x='10' y='10' width='${W-20}' height='${H-20}' rx='10' fill='none' stroke='#5c8f35' stroke-width='3'/>`;
+  const reed=(x,y,fl)=>`<g transform='translate(${x},${y}) scale(${fl?-1.5:1.5},1.5)' fill='none' stroke-linecap='round'><path d='M8 100Q6 60 9 18' stroke='#4f7a2c' stroke-width='2'/><path d='M17 100Q20 66 16 40' stroke='#3f6b2a' stroke-width='2'/><path d='M12 100Q2 80 2 62' stroke='#5c8f35' stroke-width='2.4'/><path d='M14 100Q24 84 24 70' stroke='#5c8f35' stroke-width='2.4'/><rect x='6.5' y='2' width='5' height='20' rx='2.5' fill='#5a3416' stroke='none'/><rect x='13.5' y='24' width='5' height='18' rx='2.5' fill='#6b4120' stroke='none'/></g>`;
+  for(let n=0;n<4;n++)b+=reed(8,24+n*152,0)+reed(W-8,60+n*146,1);
+  FROGS.forEach((f,k)=>{const x=LX(k),cx=x+LW/2;
+    b+=`<rect x='${x}' y='16' width='${LW}' height='${H-32}' rx='12' fill='url(#wt)'/><ellipse cx='${x+28}' cy='150' rx='26' ry='60' fill='#fff' opacity='.1'/><ellipse cx='${x+62}' cy='410' rx='22' ry='70' fill='#fff' opacity='.07'/>`;
+    for(let y=58;y<H-30;y+=27)b+=`<path d='M${x+6} ${y+(k*7)%13}q10-4 20 0t20 0t20 0t16 0' fill='none' stroke='${(y/27|0)%2?'#bfeaf5':'#083c55'}' stroke-width='1.6' opacity='${(y/27|0)%2?.34:.3}'/>`;
+    b+=`<rect x='${x}' y='16' width='${LW}' height='34' rx='10' fill='url(#ck)'/><rect x='${x}' y='16' width='${LW}' height='${H-32}' rx='12' fill='none' stroke='${f[1]}' stroke-width='10' opacity='.3'/><rect x='${x}' y='16' width='${LW}' height='${H-32}' rx='12' fill='none' stroke='${f[1]}' stroke-width='3.5'/>`;
+    for(let n=0;n<9;n++){const y=588-n*64;
+      b+=`<ellipse cx='${cx+2}' cy='${y+5}' rx='25' ry='24' fill='#00202c' opacity='.3'/><circle cx='${cx}' cy='${y}' r='24' fill='#58b860' stroke='#2c7a3c' stroke-width='3'/><path d='M${cx} ${y}L${cx+25} ${y-13}A27 27 0 0 1 ${cx+25} ${y+11}Z' fill='#1b7594'/><ellipse cx='${cx-8}' cy='${y-9}' rx='9' ry='6' fill='#fff' opacity='.22'/>`+
+        ((n*3+k*2)%5===1?`<circle cx='${cx+9}' cy='${y-12}' r='8' fill='#fff'/><circle cx='${cx+9}' cy='${y-12}' r='6.4' fill='#ff9fc0'/><circle cx='${cx+9}' cy='${y-12}' r='2.6' fill='#ffe08a'/>`:'')}
+    b+=frogArt(f[1],cx,588,62)});
+  for(const q of[[70,200],[414,360],[236,90],[330,520],[120,470],[250,300]])b+=`<circle cx='${q[0]}' cy='${q[1]}' r='10' fill='url(#ff)'/>`;
+  return svBox(W,H,b)})();
+const MOSS='linear-gradient(#5c8f35,#2c4a1c)',BARK='repeating-linear-gradient(90deg,#3b2a17 0 9px,#2a1d10 9px 14px,#4a3520 14px 21px)',MOSSY='linear-gradient(#4f7a2c 0 38%,#3b2a17 38%)';
+const cattail=(x,z,h)=>part(x,-447-h/2,z,5,h,5,{all:'#5c8f35',skip:'B'})+part(x,-447-h-16,z,12,38,12,{all:'#5a3416'});
+const rock=(x,z,w)=>part(x,-447-w*.3,z,w,w*.6,w*.8,{all:'linear-gradient(#8a8f8a,#5a5f5a)',top:'radial-gradient(circle at 35% 35%,#a9aea9,#6f746f)',skip:'B'});
+const FROGT=part(0,-427,0,480,26,640,{top:SWAMPF,all:MOSSY,skip:'B'})+part(0,-207,0,170,414,200,{all:BARK,skip:'TB'})+part(0,-6,0,340,12,420,{all:'#2c4a1c',top:'radial-gradient(circle,#5c8f35,#2c4a1c)',skip:'B'})+   // a mossy slab on a tree stump
+  part(0,-447,-313,480,14,14,{all:MOSS,skip:'B'})+part(0,-447,313,480,14,14,{all:MOSS,skip:'B'})+part(-233,-447,0,14,14,612,{all:MOSS,skip:'B'})+part(233,-447,0,14,14,612,{all:MOSS,skip:'B'})+
+  FROGS.map((f,k)=>part(-144+k*96,-461,-313,14,14,14,{all:f[1],top:'#fff'})).join('')+                                                              // a lamp in each lane's colour at the finish
+  cattail(-222,-296,150)+cattail(-208,-270,110)+cattail(222,-296,140)+cattail(210,-268,100)+cattail(-224,40,120)+cattail(224,-60,130)+cattail(222,210,90)+cattail(-222,250,100)+
+  part(-222,-463,-130,22,18,130,{all:BARK,front:'radial-gradient(circle,#c9a36b 0 30%,#6b4a26 32% 60%,#3b2a17 62%)',back:'radial-gradient(circle,#c9a36b 0 30%,#6b4a26 32% 60%,#3b2a17 62%)',top:'linear-gradient(90deg,#5c8f35,#3b2a17 60%)',skip:'B'})+   // a fallen log
+  rock(-224,160,26)+rock(224,120,22)+rock(226,-180,18);
+const macaron=(x,z,c,lift)=>on(x,z,26,5,26,{all:c,skip:'B'},lift)+on(x,z,22,3,22,{all:'#fff6ec',skip:'TB'},(lift||0)+5)+on(x,z,26,5,26,{all:c,skip:'B'},(lift||0)+8);
+const lolly=(x,z,k)=>on(x,z,3,46,3,{all:'#fff',skip:'TB'})+on(x,z,30,30,5,{all:'#fff',front:tile(k,'#fff',50),back:tile(k,'#fff',50)},40);
+const CANDY=snackCloth('linear-gradient(#e6bc68,#a9812f)','radial-gradient(circle,#ffe9a8,#e6bc68)')+
+  on(-88,-30,120,4,120,{all:'#fff',top:'radial-gradient(circle,#fff,#f0e4d6)',skip:'B'})+[['#cf1f3d',-118,-58],['#12040a',-88,-58],['#ff9fc0',-58,-58],['#12040a',-118,-28],['#cf1f3d',-88,-28],['#fff6ec',-58,-28],['#ff9fc0',-118,2],['#fff6ec',-88,2],['#cf1f3d',-58,2]].map(q=>macaron(q[1],q[2],q[0],4)).join('')+
+  macaron(-103,-43,'#fff6ec',17)+macaron(-73,-43,'#cf1f3d',17)+macaron(-103,-13,'#12040a',17)+macaron(-73,-13,'#ff9fc0',17)+macaron(-88,-28,'#e6bc68',30)+
+  on(78,-36,84,70,84,{all:'linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.12)),radial-gradient(circle at 20% 30%,#cf1f3d 0 7%,transparent 8%),radial-gradient(circle at 60% 55%,#ffe08a 0 7%,transparent 8%),radial-gradient(circle at 80% 25%,#12040a 0 7%,transparent 8%),radial-gradient(circle at 35% 75%,#ff9fc0 0 7%,transparent 8%),radial-gradient(circle at 75% 82%,#cf1f3d 0 7%,transparent 8%),#f6ead6',top:GOLDT,skip:'B'})+
+  on(-70,96,100,10,70,{all:BRASS,top:GOLDT,skip:'B'})+chips(-100,96,14,'#e6bc68')+chips(-70,96,22,'#e6bc68')+chips(-40,96,10,'#e6bc68')+
+  lolly(40,90,'h')+lolly(78,90,'s')+lolly(116,90,'d');
 const PROPS=[
-  {id:'pokerA',x:-780,z:-300,r:230,html:pokerTable()},
-  {id:'pokerB',x:780,z:-300,r:230,html:pokerTable()},
-  {id:'craps',x:0,z:760,r:290,rot:180,html:tableTop(460,260,ALLEY)+part(0,-520,-121,460,160,18,{all:BRICK,top:'#2a1a14',skip:'B'})+        // the alley wall to throw against
+  {id:'pokerA',x:-1350,z:-1385,r:230,rot:180,html:pokerTable()},
+  {id:'pokerB',x:-1350,z:-915,r:230,html:pokerTable()},
+  {id:'pit',x:-1350,z:-1150,r:150,html:part(0,-165,0,250,330,18,{all:WOOD,top:BRASS,skip:'B'})},        // the low wall between the two dealers, open at both ends
+  {id:'frog',x:0,z:1500,r:390,rot:180,html:FROGT},
+  {id:'craps',x:1350,z:-1150,r:290,html:tableTop(460,260,ALLEY)+part(0,-520,-121,460,160,18,{all:BRICK,top:'#2a1a14',skip:'B'})+        // the alley wall to throw against
      part(-223,-449,9,14,18,242,{all:'#3d3a38',skip:'B'})+part(223,-449,9,14,18,242,{all:'#3d3a38',skip:'B'})+part(0,-449,123,460,18,14,{all:'#3d3a38',skip:'B'})+
      part(-46,-453,6,26,26,26,{all:die(5),top:die(3),skip:'B'})+part(14,-453,-40,26,26,26,{all:die(2),top:die(4),skip:'B'})+
      part(150,-444,70,22,8,22,{all:'repeating-linear-gradient(#12040a 0 3px,#fff 3px 4px)',top:'radial-gradient(circle,#12040a 0 55%,#fff 56%)',skip:'B'})},
-  {id:'cake',x:1690,z:1700,r:215,rot:180,html:part(0,-215,0,300,430,200,{all:CLOTH,top:'radial-gradient(circle,#fff,#f6dfe0)',skip:'B'})+
+  {id:'cake',x:0,z:-2560,r:320,html:part(0,-215,0,460,430,460,{all:CLOTH,top:'radial-gradient(circle,#fff,#f6dfe0)',skip:'B'})+        // the big cake, under the sign on the front wall
+     `<div style="position:absolute;transform-style:preserve-3d;transform:translate3d(0,-430px,0) scale3d(1.9,1.9,1.9) translate3d(0,430px,0)">`+
      part(0,-465,0,150,70,150,{all:'linear-gradient(#ff9fc0 30%,#fff6ec 30% 38%,#f7b7cf 38%)',top:'#ffc2d6',skip:'B'})+part(0,-530,0,110,60,110,{all:'linear-gradient(#fff6ec 28%,#ff9fc0 28% 36%,#fff6ec 36%)',top:'#fff6ec',skip:'B'})+
-     part(0,-585,0,72,50,72,{all:'linear-gradient(#ff9fc0 30%,#fff6ec 30% 40%,#f7b7cf 40%)',top:'#ffc2d6',skip:'B'})+candle(-18)+candle(18)+
-     part(-108,-436,56,56,6,56,{all:'#fff',top:'radial-gradient(circle,#ff9fc0 0 34%,#fff 36%)',skip:'B'})+part(108,-436,-50,56,6,56,{all:'#fff',top:'radial-gradient(circle,#fff6ec 0 34%,#fff 36%)',skip:'B'})},
-  {id:'snackA',x:-1690,z:1700,r:215,rot:180,html:DRINKS},
-  {id:'snackB',x:-1690,z:-1700,r:215,html:SNACKS},
-  {id:'snackC',x:1690,z:-1700,r:215,html:SWEETS}
+     part(0,-585,0,72,50,72,{all:'linear-gradient(#ff9fc0 30%,#fff6ec 30% 40%,#f7b7cf 40%)',top:'#ffc2d6',skip:'B'})+candle(-18)+candle(18)+'</div>'+
+     part(-180,-436,178,70,6,70,{all:'#fff',top:'radial-gradient(circle,#ff9fc0 0 34%,#fff 36%)',skip:'B'})+part(180,-436,178,70,6,70,{all:'#fff',top:'radial-gradient(circle,#fff6ec 0 34%,#fff 36%)',skip:'B'})},
+  {id:'snackA',x:-2660,z:2660,r:240,rot:180,html:DRINKS},
+  {id:'snackB',x:-2660,z:-2660,r:240,html:SNACKS},
+  {id:'snackC',x:2660,z:-2660,r:240,html:SWEETS},
+  {id:'snackD',x:2660,z:2660,r:240,rot:180,html:CANDY}
 ];
 (function(){
   let h='';
   for(const p of PROPS)h+=`<div class="fig3 prop" data-prop="${p.id}" style="transform:translate3d(${p.x}px,700px,${p.z}px) rotateY(${p.rot||0}deg)">${p.html}</div>`;
-  for(const p of PROPS.slice(0,2))h+=`<div class="fig3" style="transform:translate3d(${p.x}px,700px,${p.z-175}px)">${person('dealer')}</div><div class="fig3 stool" style="transform:translate3d(${p.x}px,700px,${p.z+190}px) rotateY(180deg)">${STOOL}</div>`;
+  for(const p of PROPS)if(p.id.startsWith('poker')){const d=p.rot?-1:1;                 // each dealer stands on the pit side of the table, the player's stool on the outside
+    h+=`<div class="fig3" style="transform:translate3d(${p.x}px,700px,${p.z-175*d}px) rotateY(${p.rot||0}deg)">${person('dealer')}</div><div class="fig3 stool" style="transform:translate3d(${p.x}px,700px,${p.z+190*d}px) rotateY(${180+(p.rot||0)}deg)">${STOOL}</div>`}
+  const fr=PROPS.find(p=>p.id==='frog');for(const dx of[-130,130])h+=`<div class="fig3 stool" style="transform:translate3d(${fr.x+dx}px,700px,${fr.z-412}px)">${STOOL}</div>`;
   const B=(cx,cy,r,col,t,fs,tc)=>`<path d="M${cx} ${cy+r*1.18}Q${cx+12} ${cy+r*2.4} 150 500" fill="none" stroke="#f3dccf" stroke-width="1.6" opacity=".7"/><ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*1.18}" fill="${col}"/><ellipse cx="${cx-r*.34}" cy="${cy-r*.42}" rx="${r*.2}" ry="${r*.32}" fill="#fff" opacity=".4"/><path d="M${cx-5} ${cy+r*1.18}h10l-5 9z" fill="${col}"/>`+
     (t==='HB'?`<text text-anchor="middle" font-family="Pacifico,'Brush Script MT',cursive" fill="${tc}"><tspan x="${cx}" y="${cy-3}" font-size="${fs}">Happy</tspan><tspan x="${cx}" y="${cy+fs*1.02}" font-size="${fs}">Birthday!</tspan></text>`
       :`<text x="${cx}" y="${cy+fs*.36}" text-anchor="middle" font-size="${fs}" font-family="${/\d/.test(t)?"Pacifico,'Brush Script MT',cursive":'Georgia,serif'}" font-weight="${/\d/.test(t)?400:800}" fill="${tc}">${t}</text>`);
   const SETS=[[['#cf1f3d','\u2665\uFE0E',54,'#fff'],['#12040a','A\u2660\uFE0E',38,'#e6bc68'],['#e6bc68','HB',23,'#7a0d20'],['#f7e9d2','\u2663\uFE0E',54,'#12040a'],['#ff9fc0','22',44,'#7a0d20']],
     [['#12040a','\u2660\uFE0E',54,'#f7e9d2'],['#cf1f3d','A\u2665\uFE0E',38,'#fff'],['#e6bc68','HB',23,'#7a0d20'],['#ff9fc0','\u2666\uFE0E',54,'#cf1f3d'],['#f7e9d2','22',44,'#cf1f3d']]];
   const spots=[[62,170,54],[232,150,56],[150,76,70],[94,292,50],[214,284,52]];
-  [[-1805,-1765,-250],[1805,-1765,-250],[-1805,1765,-250],[1805,1765,-250]].forEach((c,n)=>{      // each bunch is tied to the back corner of its corner table
+  [[-2790,-2800,-250],[2790,-2800,-250],[-2790,2800,-250],[2790,2800,-250]].forEach((c,n)=>{      // each bunch is tied to the back corner of its corner table
     h+=`<div class="bln" data-x="${c[0]}" data-z="${c[1]}" data-y="${c[2]}"><svg viewBox="0 0 300 520" style="animation-delay:${-n*1.3}s">${SETS[n%2].map((b,k)=>B(spots[k][0],spots[k][1],spots[k][2],b[0],b[1],b[2],b[3])).join('')}<rect x="132" y="498" width="36" height="20" rx="4" fill="#e6bc68"/></svg></div>`});
   $('room').insertAdjacentHTML('beforeend',h);
 })();
@@ -1436,6 +1516,9 @@ function propTap(id){
   if(id==='snackA')return toast('Champagne and cocktails. Cheers to 22!');
   if(id==='snackB')return toast('Popcorn, pretzels and cupcakes. Help yourself!');
   if(id==='snackC')return toast('Chocolate chips, card cookies and sugar dice.');
+  if(id==='pit')return;
+  if(id==='frog')return miniOpen('frog');
+  if(id==='snackD')return toast('Macarons, chocolate coins and lollipops.');
   if(id==='craps')return miniOpen('craps');
   return miniOpen('poker');
 }
@@ -1448,7 +1531,7 @@ function buildPeople(){
   const sl=$('hand').querySelector('path');sl.setAttribute('fill',who==='her'?'url(#seq2)':'#e8b990');
 }
 buildPeople();
-const STN=[{w:'right',u:slotU(3)},{w:'back',u:LRU[2],lr:1},{w:'left',u:slotU(5)},{w:'back',u:LRU[0],lr:1},{w:'right',u:slotU(5)},{table:1},{w:'left',u:slotU(2)}];     // table: he stands at the blackjack table for a while
+const STN=[{w:'right',u:slotU(4)},{w:'back',u:LRU[2],lr:1},{w:'left',u:slotU(3)},{w:'back',u:LRU[0],lr:1},{w:'right',u:slotU(7)},{table:1},{w:'left',u:slotU(2)}];     // table: he stands at the blackjack table for a while
 const him={k:0,next:0,mode:'sit',t:0,dur:14,pos:[0,0],path:[],spinning:false,step:0};
 function himSeat(){
   const st=STN[him.k];
@@ -1469,10 +1552,11 @@ function himTick(dt){
     let k=him.k;do{k=(k+1)%STN.length}while(seated&&!STN[k].table&&seated.w===STN[k].w&&seated.u===STN[k].u);
     const a=STN[him.k],b=STN[k];him.next=k;him.mode='walk';him.step=0;$('himWalk').classList.add('walk');
     const tp=[Math.min(190,tbl.hw*.62),tbl.near+52];
-    him.path=[a.table?[tp[0]+260,tp[1]+330]:toRoom(a.w,a.u,470),[0,90]].concat(b.table?[[tp[0]+260,tp[1]+330],tp]:[toRoom(b.w,b.u,470),toRoom(b.w,b.u,250)]);
+    const round=st=>st.lr?[[st.u>0?-1100:1100,1500]]:[];                              // to and from the lioness cabinets he walks round the frog table
+    him.path=[a.table?[tp[0]+260,tp[1]+330]:toRoom(a.w,a.u,470),...round(a),[0,90],...round(b)].concat(b.table?[[tp[0]+260,tp[1]+330],tp]:[toRoom(b.w,b.u,470),toRoom(b.w,b.u,250)]);
     $('himSit').style.display='none';himReels.classList.remove('on','win');$('himWalk').style.display='block';
   }
-  let v=250*dt;him.step+=dt;
+  let v=500*dt;him.step+=dt;
   while(v>0&&him.path.length){
     const p=him.path[0],dx=p[0]-him.pos[0],dz=p[1]-him.pos[1],d=Math.hypot(dx,dz);
     if(d<=v){him.pos=p.slice();him.path.shift();v-=d}else{him.pos[0]+=dx/d*v;him.pos[1]+=dz/d*v;v=0}
@@ -1529,8 +1613,8 @@ function walk(t){
     const len=Math.hypot(f,r);if(len>1){f/=len;r/=len}
     if(len>.02||turn){
       yaw+=turn*95*dt;
-      const th=yaw*Math.PI/180,v=560*dt;
-      const nx=Math.max(-1700,Math.min(1700,cx+(Math.sin(th)*f+Math.cos(th)*r)*v)),nz=Math.max(-1700,Math.min(1700,cz+(-Math.cos(th)*f+Math.sin(th)*r)*v));
+      const th=yaw*Math.PI/180,v=1120*dt;
+      const nx=Math.max(-2680,Math.min(2680,cx+(Math.sin(th)*f+Math.cos(th)*r)*v)),nz=Math.max(-2680,Math.min(2680,cz+(-Math.cos(th)*f+Math.sin(th)*r)*v));
       if(!blocked(nx,nz)){cx=nx;cz=nz}else if(!blocked(nx,cz))cx=nx;else if(!blocked(cx,nz))cz=nz;     // slide along the table
       applyView();
     }
@@ -1635,14 +1719,13 @@ function sitAt(w,i,lr){                           // sit her down and frame her 
   if(seated)return;
   const isLr=lr!==undefined,u=isLr?LRU[lr]:slotU(i),busy=himBusy(w,u);
   if(busy)return toast(busy);
-  if(!isLr&&w==='front'&&i>1&&i<6)return toast('The table is in the way of that one.');
   if(!isLr&&noSeat(w,i))return;
   const side=u>0?-1:1;
   seated={prev:[cx,cz,yaw,pitch],w,u,lr:isLr};keys.clear();joy[0]=joy[1]=0;$('knob').style.transform='';
   placeFig($('meSit'),w,u,220,180);
   myReels.classList.toggle('on',!isLr);myReels.classList.remove('win');
   if(!isLr){place(myReels,w,u,5,154,.875);myCells.forEach((c,k)=>c.innerHTML=symHTML([0,1,0][k]))}
-  const cam=toRoom(w,Math.max(-1700,Math.min(1700,u+side*(isLr?300:760))),isLr?640:900),tg=toRoom(w,u+side*70,0);
+  const cam=toRoom(w,Math.max(-2680,Math.min(2680,u+side*(isLr?300:760))),isLr?640:900),tg=toRoom(w,u+side*70,0);
   let ny=Math.atan2(tg[0]-cam[0],-(tg[1]-cam[1]))*180/Math.PI;
   ny+=Math.round((yaw-ny)/360)*360;                // turn the short way
   world.style.transition='transform .85s cubic-bezier(.3,.7,.2,1)';
@@ -2149,7 +2232,7 @@ const mg={kind:'',bet:25,busy:false,point:null,live:0,stage:'bet',p:[],d:[],deck
 function miniUI(msg){
   $('mBank').textContent=fmtB(S.bank);
   if(msg!==undefined)$('mMsg').innerHTML=msg;
-  const lock=mg.busy||(mg.kind==='craps'?mg.point!=null:mg.stage==='hold');
+  const lock=mg.busy||(mg.kind==='craps'?mg.point!=null:mg.kind==='poker'&&mg.stage==='hold');
   document.querySelectorAll('#mBets button').forEach(b=>{b.classList.toggle('on',+b.dataset.mb===mg.bet);b.textContent=short(+b.dataset.mb);b.disabled=lock});
   const a=$('mA'),b=$('mB');
   if(mg.kind==='craps'){
@@ -2157,14 +2240,18 @@ function miniUI(msg){
     const ch=$('chalk');if(ch)ch.innerHTML=mg.point==null?'<small>First roll</small><b>7 or 11</b><small>wins · 2, 3 or 12 loses</small>':`<small>Your point is</small><b>${mg.point}</b><small>roll it again to win · a 7 loses</small>`;
     const mb=$('mybet');if(mb)mb.innerHTML=mg.live?stackHTML(mg.live)+`<span>${fmtC(mg.live)} riding</span>`:'';
   }
+  else if(mg.kind==='frog'){a.textContent='Leave';a.disabled=mg.busy;b.textContent='Race';b.disabled=mg.busy||mg.pick==null||S.bank<mg.bet;
+    document.querySelectorAll('.fnames button').forEach(x=>x.classList.toggle('on',+x.dataset.f===mg.pick));document.querySelectorAll('.lane').forEach(x=>x.classList.toggle('mine',+x.dataset.f===mg.pick))}
   else if(mg.stage==='hold'){a.textContent='Leave';a.disabled=true;b.textContent='Draw';b.disabled=mg.busy}
   else{a.textContent='Leave';a.disabled=mg.busy;b.textContent='Deal';b.disabled=mg.busy||S.bank<mg.bet}
   const pot=$('pkPot');if(pot)pot.innerHTML=mg.stage==='bet'?'':stackHTML(mg.bet*2)+`<span>Pot ${fmtC(mg.bet*2)}</span>`;
 }
 function miniOpen(kind){
   mg.kind=kind;mg.busy=false;mg.point=null;mg.live=0;mg.stage='bet';keys.clear();
-  $('mTitle').textContent=kind==='craps'?'Street Craps':'Five Card Draw';
-  $('mBets').innerHTML='<span style="color:#d9f2e2">Bet</span>'+[5,25,100,500,1000,5000].map(v=>`<button data-mb="${v}"></button>`).join('');
+  $('mTitle').textContent=kind==='craps'?'Street Craps':kind==='frog'?'Lily Pad Derby':'Five Card Draw';
+  const list=kind==='frog'?[500,1000,5000,10000,25000,50000,100000]:[5,25,100,500,1000,5000];if(!list.includes(mg.bet))mg.bet=list[kind==='frog'?0:1];
+  $('mBets').innerHTML='<span style="color:#d9f2e2">Bet</span>'+list.map(v=>`<button data-mb="${v}"></button>`).join('');
+  if(kind==='frog'){frogSetup();$('mini').classList.add('open');return}
   if(kind==='craps'){
     $('mStage').innerHTML='<div class="street" id="pit"><div class="wallb"></div><div class="tag">Street Craps</div><div class="chalk" id="chalk"></div><div class="dsh" id="dsh0"></div><div class="dsh" id="dsh1"></div><div class="die" id="die0"></div><div class="die" id="die1"></div><div class="mybet" id="mybet"></div><div class="pbar" id="pbar"><i></i></div><div id="crHand"></div></div>';
     $('crHand').innerHTML=$('hand').innerHTML;const hc=$('crHand').querySelector('#handchip');if(hc)hc.remove();
@@ -2248,6 +2335,55 @@ function diceThrow(power,res){                   // real cubes: they tumble thro
     })(last);
   });
 }
+/* ---------- frog race ---------- */
+const PADS=8,FROGSVG=c=>`<svg viewBox="0 0 60 60"><g class="legs" fill="${c}"><path d="M14 34Q0 40 4 56Q10 58 12 50Q12 44 20 42Z"/><path d="M46 34Q60 40 56 56Q50 58 48 50Q48 44 40 42Z"/></g><path d="M12 22Q4 16 6 8Q12 8 16 16ZM48 22Q56 16 54 8Q48 8 44 16Z" fill="${c}"/>
+ <ellipse cx="30" cy="32" rx="17" ry="20" fill="${c}"/><ellipse cx="30" cy="36" rx="10" ry="12" fill="#fff" opacity=".22"/><circle cx="21" cy="15" r="7.5" fill="${c}"/><circle cx="39" cy="15" r="7.5" fill="${c}"/>
+ <circle cx="21" cy="14" r="5" fill="#fff"/><circle cx="39" cy="14" r="5" fill="#fff"/><circle cx="21" cy="12.5" r="2.4" fill="#12040a"/><circle cx="39" cy="12.5" r="2.4" fill="#12040a"/></svg>
+ <svg class="crown" viewBox="0 0 40 28"><path d="M3 26V8l9 9L20 3l8 14 9-9v18z" fill="#ffd76a" stroke="#a9812f" stroke-width="2" stroke-linejoin="round"/><circle cx="20" cy="20" r="2.6" fill="#cf1f3d"/></svg>`;
+const padY=y=>(7+y*(84/PADS))+'%';              // where pad number y sits up the lane
+function frogSetup(){
+  mg.busy=false;if(mg.pick===undefined)mg.pick=null;
+  $('mStage').innerHTML='<div class="swamp" id="swamp">'+FROGS.map((f,k)=>`<div class="lane" data-f="${k}" style="--fc:${f[1]}"><div class="fin"></div>${Array.from({length:PADS+1},(_,n)=>`<u${(n*3+k*2)%5===1?' class="fl"':''} style="bottom:${padY(n)}"></u>`).join('')}<div class="frog" id="frog${k}" style="bottom:${padY(0)}">${FROGSVG(f[1])}</div></div>`).join('')+[[9,30],[86,58],[46,12],[70,84],[20,72]].map((q,n)=>`<s style="left:${q[0]}%;top:${q[1]}%;animation-delay:${-n*1.1}s,${-n*.4}s"></s>`).join('')+'</div>'+
+    '<div class="fnames">'+FROGS.map((f,k)=>`<button data-f="${k}" style="--fc:${f[1]}">${f[0]}<small>Your Bet</small></button>`).join('')+'</div>';
+  miniUI('Pick a frog, set your bet and start the race. The first frog over the line pays 3 to 1.');
+}
+function croak(k){                                 // a short, pulsing croak; each frog has its own pitch
+  if(!actx||actx.state!=='running')return;
+  try{const t=actx.currentTime,o=actx.createOscillator(),g=actx.createGain(),lfo=actx.createOscillator(),lg=actx.createGain(),f=actx.createBiquadFilter(),base=[92,118,140,104][k]*(.94+Math.random()*.12);
+    o.type='sawtooth';o.frequency.setValueAtTime(base,t);o.frequency.linearRampToValueAtTime(base*1.25,t+.09);o.frequency.linearRampToValueAtTime(base*.85,t+.24);
+    lfo.type='square';lfo.frequency.value=26+k*3;lg.gain.value=.16;lfo.connect(lg).connect(g.gain);
+    f.type='bandpass';f.frequency.value=520+k*70;f.Q.value=1.6;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.2,t+.03);g.gain.linearRampToValueAtTime(.0001,t+.27);
+    o.connect(f).connect(g).connect(actx.destination);o.start(t);lfo.start(t);o.stop(t+.3);lfo.stop(t+.3)}catch(e){}
+}
+function frogBetsIn(){return mg.pick!=null}        // with two players at the table this will wait until both have picked a frog and a bet
+function frogRace(){
+  if(mg.busy||!frogBetsIn()||S.bank<mg.bet)return;
+  mg.busy=true;S.bank=r2(S.bank-mg.bet);saveBank();clack();miniUI(`They’re off! You’re on <b>${FROGS[mg.pick][0]}</b>.`);
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches,edge=lucky()?.94:1;
+  const fr=FROGS.map((f,k)=>({el:$('frog'+k),pos:0,y:0,hop:false,t0:0,dur:0,next:0,done:0}));
+  fr.forEach(f=>{f.el.classList.remove('lead','hop');f.el.style.bottom=padY(0);f.el.style.transform=''});
+  let lead=-1,winner=-1,endAt=0,lastCroak=0;const start=performance.now()+500;fr.forEach(f=>f.next=start+Math.random()*260);
+  (function step(t){
+    fr.forEach((f,k)=>{
+      if(f.hop){const p=(t-f.t0)/f.dur;
+        if(p>=1){f.hop=false;f.pos++;f.y=f.pos;f.el.classList.remove('hop');f.next=f.t0+f.dur+90+Math.random()*380;if(f.pos>=PADS)f.done=f.t0+f.dur;f.el.style.transform=''}
+        else{f.y=f.pos+p;f.el.style.transform=`translate(-50%,50%) scale(${(1+.42*Math.sin(Math.PI*p)).toFixed(3)})`}}
+      else if(!f.done&&t>=f.next&&winner<0||(!f.done&&winner>=0&&t>=f.next&&t<endAt)){f.hop=true;f.t0=t;f.dur=(300+Math.random()*220)*(k===mg.pick?edge:1)*(still?.6:1);f.el.classList.add('hop');
+        if(t-lastCroak>170&&Math.random()<.55){lastCroak=t;croak(k)}}
+      f.el.style.bottom=padY(f.y);
+    });
+    let best=lead;fr.forEach((f,k)=>{if(best<0||f.y>fr[best].y+.02)best=k});                      // the crown moves when another frog gets in front
+    if(best!==lead&&winner<0){if(lead>=0)fr[lead].el.classList.remove('lead');fr[best].el.classList.add('lead');lead=best}
+    if(winner<0){const fin=fr.map((f,k)=>[f.done,k]).filter(q=>q[0]).sort((a,b)=>a[0]-b[0]);
+      if(fin.length){winner=fin[0][1];endAt=t+900;if(lead>=0)fr[lead].el.classList.remove('lead');fr[winner].el.classList.add('lead');lead=winner}}
+    if(winner<0||t<endAt||fr.some(f=>f.hop))return requestAnimationFrame(step);
+    const won=winner===mg.pick,name=FROGS[winner][0];
+    if(won){S.bank=r2(S.bank+mg.bet*4);saveBank();chime(.9)}
+    mg.busy=false;miniUI(won?`<b>${name} wins!</b> You win ${fmtC(mg.bet*3)}.`:`<b>${name} wins.</b> ${FROGS[mg.pick][0]} didn’t make it. You lose ${fmtC(mg.bet)}.`);
+  })(performance.now());
+}
+$('mStage').addEventListener('click',e=>{const f=e.target.closest('[data-f]');if(!f||mg.kind!=='frog'||mg.busy)return;mg.pick=+f.dataset.f;tick();
+  document.querySelectorAll('.frog').forEach((x,k)=>{x.classList.remove('lead','hop');x.style.bottom=padY(0);x.style.transform=''});miniUI(`You’re backing <b>${FROGS[mg.pick][0]}</b>. Press Race when you’re ready.`)});
 /* five card draw against the dealer */
 function pkDeck(){const dk=[];for(const su of 'hdsc')for(const r of RANKS)dk.push({r,s:su,id:++uid});for(let i=dk.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[dk[i],dk[j]]=[dk[j],dk[i]]}return dk}
 function pkShow(){$('pkP').innerHTML=mg.p.map((c,i)=>`<div class="hc${mg.hold[i]?' held':''}" data-h="${i}">${cardHTML(c)}<span>HELD</span></div>`).join('')}
@@ -2277,7 +2413,7 @@ async function pokerDraw(){
 $('mStage').addEventListener('click',e=>{const h=e.target.closest('.hc');if(!h||mg.kind!=='poker'||mg.stage!=='hold'||mg.busy)return;const i=+h.dataset.h;mg.hold[i]=!mg.hold[i];h.classList.toggle('held',mg.hold[i]);tick()});
 $('mB').addEventListener('pointerdown',chargeStart);
 ['pointerup','pointercancel'].forEach(t=>$('mB').addEventListener(t,chargeEnd));
-$('mB').onclick=e=>{if(mg.kind==='craps'){if(e.detail===0&&!mg.busy&&!charge)crapsRoll(.55);return}mg.stage==='hold'?pokerDraw():pokerDeal()};   // craps throws on release; a keyboard press throws at medium power
+$('mB').onclick=e=>{if(mg.kind==='frog')return frogRace();if(mg.kind==='craps'){if(e.detail===0&&!mg.busy&&!charge)crapsRoll(.55);return}mg.stage==='hold'?pokerDraw():pokerDeal()};   // craps throws on release; a keyboard press throws at medium power
 $('mA').onclick=()=>{if(mg.busy)return;if(mg.kind==='poker'&&mg.stage==='hold')return;if(mg.kind==='craps'&&mg.point!=null)return;$('mini').classList.remove('open');render()};
 $('mBets').onclick=e=>{const b=e.target.closest('[data-mb]');if(!b||b.disabled)return;mg.bet=+b.dataset.mb;clack();miniUI()};
 
