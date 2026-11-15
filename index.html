@@ -1281,7 +1281,7 @@ function wallSVG(kind){
     const SU=[['\u2660\uFE0E','#12040a'],['\u2665\uFE0E','#cf1f3d'],['\u2663\uFE0E','#12040a'],['\u2666\uFE0E','#cf1f3d']];let n=0;
     const row=(txt,y)=>[...txt].map((ch,k)=>{if(ch===' ')return'';const [su,col]=SU[n++%4],x=840+(k-(txt.length-1)/2)*41;
       return `<g transform="translate(${x},${y}) rotate(${n%2?-3:3})"><rect x="-17" y="-25" width="34" height="50" rx="4" fill="#fdfaf3" stroke="#e6bc68" stroke-width="1.2"/><text y="8" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="25" fill="${col}">${ch}</text><text x="-11" y="-13" text-anchor="middle" font-size="9" fill="${col}">${su}</text><text x="11" y="21" text-anchor="middle" font-size="9" fill="${col}">${su}</text></g>`}).join('');
-    s+=row('CHEERS TO 22',66)+row('EMILY!',124);
+    s+=row('I DONT KNOW',33)+row('ABOUT YOU BUT',66)+row ('IM FEELING 22!',124);
   }else{
     const t={left:['RED','jack','#ff4d6d'],right:['K '+HEART+' E','09 \u00b7 20 \u00b7 26','#ffa3cf'],back:['HAPPY','22nd','#e6bc68']}[kind];
     s+=`<rect x="690" y="40" width="300" height="100" rx="12" fill="#12040a" stroke="${t[2]}" stroke-width="2" opacity=".95"/>
